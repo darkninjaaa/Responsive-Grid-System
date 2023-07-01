@@ -1,0 +1,107 @@
+
+/* handy-collapse */
+/* top, right, bottom, left */
+
+.handy-panel
+{
+	background: #eee;
+	margin: 1px;
+	border: 1px solid #CCC;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+}
+
+.handy-subpanel
+{ 
+	background: #eee;
+	margin: 1px 10px 1px 10px;
+	border: 1px solid #CCC;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+}
+
+.handy-panel.collapsed,
+.handy-subpanel.collapsed
+{
+	border: 1px solid #999;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+}
+
+.handy-panel.expand,
+.handy-subpanel.expand
+{
+	border-left: 1px solid #CCC;
+	border-right: 1px solid #CCC;
+	border-bottom: 1px solid #CCC;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+}
+
+.handy-panel > button,
+.handy-subpanel > button
+{
+	margin: 0px;
+	padding: 2px 2px 2px 5px;
+	background: #CCC url(images/arrow-up.gif) no-repeat 99.2% center;
+	border: 0px;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+}
+
+.handy-panel > button:hover,
+.handy-subpanel > button:hover { 
+	background-color: #A9BCEF; 
+	cursor:pointer;
+}
+
+.handy-panel.collapsed > button,
+.handy-subpanel.collapsed > button
+{
+	margin: 0px;
+	padding: 2px 2px 2px 5px;
+	background: #CCC url(images/arrow-dn.gif) no-repeat 99.2% center;
+	border-color: #CCC;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+}
+
+.handy-panel.collapsed > button:hover,
+.handy-subpanel.collapsed > button:hover
+{
+	margin: 0px;
+	padding: 2px 2px 2px 5px;
+	background: #A9BCEF url(images/arrow-dn.gif) no-repeat 99.2% center;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+}
+
+.handy-panelcontent
+{ 
+	padding: 2px 3px 2px 4px; 
+	margin: 0px 0px 0px 0px;
+	overflow: hidden;
+	list-style-type: none;
+}
+
+.handy-panelcontent.is-1 { background-color:#FFFFFF; }
+.handy-panelcontent.is-2 { background-color:#F7F7F7; }
+.handy-panelcontent.is-3 { background-color:#EEEEEE; }
+.handy-panelcontent.is-4 { background-color:#E7E7E7; }
+.handy-panelcontent.is-5 { background-color:#CACACA; }
+
+
+.handy-panelcontent p
+{ 
+	margin: 0px; 
+	padding: 0px 0px 2px 0px; 
+}
+
+/* collapsed panel content */
+.handy-panel.collapsed .handy-panelcontent { display: none; }
+.handy-subpanel.collapsed .handy-panelcontent { display: none; }
+
+.button.is-fullwidth{
+	display:flex;
+	width:100%
+}

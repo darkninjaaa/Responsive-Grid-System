@@ -1,0 +1,105 @@
+/*  SECTIONS  */
+/*  splits up the page horizontally.  */
+/*  You'll need a few of these to break up the content, and you can use them in your main wrapper, or within other divs.  */
+.grids_section {
+	clear: both;
+	margin: 0px;
+	padding: 0px;
+}
+
+/*  GROUPING  */
+/*  solves floating problems, by forcing the section to self clear its children (aka the clearfix hack).  */
+/*  This is good in Firefox 3.5+, Safari 4+, Chrome, Opera 9+ and IE 6+.  */
+.grids_group:before,
+.grids_group:after { content:""; display:table; }
+.grids_group:after { clear:both;}
+.grids_group { zoom:1; /* For IE 6/7 */ }
+
+/*  COLUMN SETUP  */
+/*  divides the section into columns.  */
+/*  Each column has a left margin of 1.6% (around 20 pixels on a normal monitor),  */
+/*  except the first one. Using .col:first-child { margin-left: 0; } means you don't need to use class="last" anywhere.  */
+/*  It works in all browsers since IE6.  */
+.grids_col {
+	clear:none;
+	display: block;
+	float:left;
+	margin: 0% 0% 0% 0% ;
+	padding: 0px 0px 0px 0px ;
+	-moz-box-sizing:border-box;
+	-webkit-box-sizing:border-box;
+	box-sizing:border-box;
+	*behavior:url(boxsizing.htc);
+}
+
+/*  INNER COLUMN SETUP  */
+.grids_innercol {
+	display: block;
+	margin: 0px 0px 0px 0px ;
+	padding: 0px 0px 0px 0px ;
+	-moz-box-sizing:border-box;
+	-webkit-box-sizing:border-box;
+	box-sizing:border-box;
+	*behavior:url(boxsizing.htc);
+}
+
+.grids_col:first-child { margin-left: 0; }
+.grids_col:last-child { padding-right: 0px; }
+
+/*  GRID OF 24 */
+.grids_1_of_24 {width : 4.16667% }
+.grids_2_of_24 {width : 8.33333% }
+.grids_3_of_24 {width : 12.50000% }
+.grids_4_of_24 {width : 16.66667% }
+.grids_5_of_24 {width : 20.83333% }
+.grids_6_of_24 {width : 25.00000% }
+.grids_7_of_24 {width : 29.16667% }
+.grids_8_of_24 {width : 33.33333% }
+.grids_9_of_24 {width : 37.50000% }
+.grids_10_of_24 {width : 41.66667% }
+.grids_11_of_24 {width : 45.83333% }
+.grids_12_of_24 {width : 50.00000% }
+.grids_13_of_24 {width : 54.16667% }
+.grids_14_of_24 {width : 58.33333% }
+.grids_15_of_24 {width : 62.50000% }
+.grids_16_of_24 {width : 66.66667% }
+.grids_17_of_24 {width : 70.83333% }
+.grids_18_of_24 {width : 75.00000% }
+.grids_19_of_24 {width : 79.16667% }
+.grids_20_of_24 {width : 83.33333% }
+.grids_21_of_24 {width : 87.50000% }
+.grids_22_of_24 {width : 91.66667% }
+.grids_23_of_24 {width : 95.83333% }
+.grids_24_of_24 {width : 100.00000% }
+
+/*  GO FULL WIDTH BELOW 480 PIXELS */
+@media only screen and (max-width: 480px) {
+	.grids_col { 
+		margin: 0% 0% 0% 0% ;
+		padding: 0px 0px 0px 0px ;
+	}
+	.grids_1_of_24,
+	.grids_2_of_24,
+	.grids_3_of_24,
+	.grids_4_of_24,
+	.grids_5_of_24,
+	.grids_6_of_24,
+	.grids_7_of_24,
+	.grids_8_of_24,
+	.grids_9_of_24,
+	.grids_10_of_24,
+	.grids_11_of_24,
+	.grids_12_of_24,
+	.grids_13_of_24,
+	.grids_14_of_24,
+	.grids_15_of_24,
+	.grids_16_of_24,
+	.grids_17_of_24,
+	.grids_18_of_24,
+	.grids_19_of_24,
+	.grids_20_of_24,
+	.grids_21_of_24,
+	.grids_22_of_24,
+	.grids_23_of_24,
+	.grids_24_of_24	{ width: 100%; }
+}
