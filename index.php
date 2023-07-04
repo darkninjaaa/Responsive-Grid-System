@@ -30,6 +30,7 @@ chdir(FCPATH);
 // Load our paths config file
 // This is the line that might need to be changed, depending on your folder structure.
 
+// add
 // http://127.0.0.1:8080/ci-436/index
 // http://127.0.0.1:8080/ci-436/public/index
 $script_name = $_SERVER['SCRIPT_NAME']; 
