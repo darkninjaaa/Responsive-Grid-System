@@ -93,6 +93,7 @@ define('EVENT_PRIORITY_NORMAL', 100);
  */
 define('EVENT_PRIORITY_HIGH', 10);
 
+// add
 // http://127.0.0.1:8080/ci-436/public/index
 define('SCRIPT_NAME', $_SERVER['SCRIPT_NAME']); 
 define('HTTP_HTTPS', ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS']=='on') ? 's' : ''));
