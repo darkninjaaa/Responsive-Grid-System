@@ -18,8 +18,11 @@ class App extends BaseConfig
      *    http://example.com/
      */
     //public string $baseURL = 'http://localhost:8080/';
+    
+    // modify
     //public $baseURL = 'http://127.0.0.1:8080/ci-436/public';
-    public $baseURL = HTTP_ROOT;
+    //public $baseURL = 'http://127.0.0.1:8080/ci-436';
+    public $baseURL = HTTP_ROOT; // define in config/constants.php
 
     /**
      * Allowed Hostnames in the Site URL other than the hostname in the baseURL.
