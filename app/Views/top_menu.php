@@ -1,6 +1,6 @@
 
 <div class="top-wrapper" id="top_wrapper">
-	<div class="nav">
+	<div id="nav" class="nav clearfix">
 		<div id="nav-button" class="nav-button">nav button</div>
 		<ul id="nav-ul" class="nav-ul submenu">
 			<li><a href="<?php echo HTTP_ROOT; ?>/"  hyperlink="true" target_blank="false"><span>Home</span></a></li>
