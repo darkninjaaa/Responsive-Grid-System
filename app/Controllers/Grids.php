@@ -279,7 +279,7 @@ class Grids extends BaseController
 			$grids .= "\n";
 		}
 
-		$grids .= "/*  GRID OF " . $this->grids_columns . " */" . "\n";
+		$grids .= "/*  " . strtoupper($this->grids_name) . " OF " . $this->grids_columns . " */" . "\n";
 	
 		for ($i = 1; $i <= $this->grids_columns; $i++) {
 			$g = number_format (($i / $this->grids_columns) * $grids_width, 5, '.', '');

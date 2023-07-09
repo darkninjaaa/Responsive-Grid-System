@@ -6,29 +6,30 @@
 				<div class="handy-panel left expand">
 					<button type="button" class="button is-fullwidth" data-left-button="height">height</button>
 					<div class="handy-panelcontent is-1" data-left-content="height">
-						<textarea id="disp_height" name="disp_height" rows="25" style="width: 97.2%" spellcheck="false" placeholder="disp_height">disp_height</textarea>
+						<textarea id="disp_height" name="disp_height" class="disp_height" rows="23" placeholder="disp_height">disp_height</textarea>
 					</div>
 				</div>
 				
 				<div class="handy-panel left collapsed">
 					<button type="button" class="button is-fullwidth" data-left-button="info">info</button>
 					<div class="handy-panelcontent is-1" data-left-content="info">
+						
 						<div class="tabs_wrapper">
-							<div class="tabs_container">
-								<ul id="tabs_info" class="tabs">
-									<div class="clearfix">
-										<div class="tabs_pull_right">
-											<span id="tabs_prev"><a href="#">prev</a></span>
-											<span id="tabs_next"><a href="#">next</a></span>
-										</div>
-										<li><a href="#tabs_seg" class="alink">segments</a></li>
-										<li class="active"><a href="#tabs_path" class="alink">path</a></li>
-										<li><a href="#tabs_doc" class="alink">doc</a></li>
+
+							<div class="tabs_list_outer">
+								<div id="tabs_list_container" class="tabs_list_container">
+									<div class="tabs_pull_right">
+										<span id="tabs_prev"><a href="#">prev</a></span>
+										<span id="tabs_next"><a href="#">next</a></span>
 									</div>
-								</ul>
+									<div class="tabs_list"><a id="#tabs_seg">segments</a></div>
+									<div class="tabs_list active"><a id="#tabs_path">path</a></div>
+									<div class="tabs_list"><a id="#tabs_doc">doc</a></div>
+								</div>
 							</div>
-							<div id="tabs_info_contents" class="tabs_contents_container">
-								<div id="tabs_seg" class="tabs_contents">
+
+							<div id="tabs_content_container" class="tabs_content_container">
+								<div id="tabs_seg" class="tabs_content">
 									<?php
 										echo 'TotalSegments : '.$TotalSegments.'<br>';
 										echo 'seg_controller : '.$seg_controller.'<br>';
@@ -36,7 +37,7 @@
 										echo 'seg_table : '.$seg_table.'<br>';
 									?>
 								</div>
-								<div id="tabs_path" class="tabs_contents">
+								<div id="tabs_path" class="tabs_content">
 									<?php
 										echo "HTTP_HTTPS => ".HTTP_HTTPS."<br>";
 										echo "HTTP_HOST => ".HTTP_HOST."<br>";
@@ -59,9 +60,10 @@
 										echo "APPPATH => ".APPPATH."<br>";
 									?>
 								</div>
-								<div id="tabs_doc" class="tabs_contents">
+								<div id="tabs_doc" class="tabs_content">
 								</div>
 							</div>
+
 						</div>
 					</div>
 				</div>

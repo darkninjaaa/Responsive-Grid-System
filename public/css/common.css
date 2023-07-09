@@ -8,7 +8,7 @@ body {
 	font-family: "맑은 고딕", "Malgun Gothic", "나눔고딕", "NanumGothic", "굴림", "Gulim", "Tahoma", "Verdana", "sans-serif";
 }
 
-input, button, select, ul, li, span, p {
+input, button, select, div, a, li, p {
 	font-size: 9pt;
 }
 
@@ -42,10 +42,10 @@ textarea {
 
 textarea,
 pre {
-    tab-size : 4;
     -o-tab-size : 4;
     -moz-tab-size : 4;
 	-webkit-tab-size: 4; 
+    tab-size : 4;
 }
 
 pre
@@ -157,3 +157,28 @@ pre
 	display: table;
 	clear: both;
 }
+
+.disp_height {
+	width: 97.2%;
+	spellcheck: false;
+}
+
+.grid_css {
+	width: 99.6%;
+	spellcheck: false;
+}	
+
+.grid_pre {
+	width: 99.6%;
+	spellcheck: false;
+}	
+
+.grid_left {
+	width: 45%;
+	float: left;
+}	
+
+.grid_right {
+	width: 55%;
+	float: right;
+}	

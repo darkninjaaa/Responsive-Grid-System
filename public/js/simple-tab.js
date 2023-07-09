@@ -1,11 +1,13 @@
+var TABS_LIST_CONTAINER = "tabs_list_container";
+var TABS_LIST = "tabs_list";
 
-var TABS_INFO = "tabs_info";
-var TABS_INFO_CONTENTS = "tabs_info_contents";
-var TABS_CONTENTS = "tabs_contents";
 var TABS_PREV = "tabs_prev";
 var TABS_NEXT = "tabs_next";
+
 var TABS_ACTIVE = "active";
-var TABS_ALINK = "alink";
+
+var TABS_CONTENT_CONTAINER = "tabs_content_container";
+var TABS_CONTENT = "tabs_content";
 
 
 if (!_typeof) {
@@ -74,20 +76,20 @@ var SimpleTab = function()
         _classCallCheck(this, SimpleTab);
 		
         _extends(this, {
-			tabs_info : TABS_INFO,
-			tabs_info_contents : TABS_INFO_CONTENTS,
-			tabs_contents : TABS_CONTENTS,
+			tabs_list_container : TABS_LIST_CONTAINER,
+			tabs_list : TABS_LIST,
 			tabs_prev : TABS_PREV,
 			tabs_next : TABS_NEXT,
 			tabs_active : TABS_ACTIVE,
-			tabs_alink : TABS_ALINK
+			tabs_content_container : TABS_CONTENT_CONTAINER,
+			tabs_content : TABS_CONTENT,
         }, options);
 
-		this.tabs_info = document.getElementById(this.tabs_info);
-		this.tabs_info_contents = document.getElementById(this.tabs_info_contents);
+		this.tabs_list_container = document.getElementById(this.tabs_list_container);
+		this.tabs_content_container = document.getElementById(this.tabs_content_container);
 
-		this.tabList = this.tabs_info.getElementsByTagName("li")
-		this.contentList = this.tabs_info_contents.querySelectorAll("."+this.tabs_contents);
+		this.tabList = this.tabs_list_container.querySelectorAll("."+this.tabs_list);
+		this.contentList = this.tabs_content_container.querySelectorAll("."+this.tabs_content);
 
         this.init();
     }
@@ -102,7 +104,7 @@ var SimpleTab = function()
 					this.setListner_aLink();
 					var item = this.element_Hasclass(this.tabList, this.tabs_active);
 					if (item) {
-						item.querySelector("."+this.tabs_alink).click();
+						item.querySelector("a").click();
 					}	
 				}
 			}, 
@@ -112,7 +114,7 @@ var SimpleTab = function()
 					var _thisalink = this;
 					for(var i = 0; i < this.tabList.length; i++)
 					{
-						this.tabList[i].querySelector("."+this.tabs_alink).addEventListener('click', function(event)
+						this.tabList[i].querySelector("a").addEventListener('click', function(event)
 						{
 							event.preventDefault();
 							for(var j = 0; j < _thisalink.tabList.length; j++) {
@@ -121,7 +123,7 @@ var SimpleTab = function()
 							}
 							this.parentNode.classList.add(_thisalink.tabs_active);
 
-							var tabs_contents_id = this.getAttribute('href');
+							var tabs_contents_id = this.getAttribute('id');
 							document.querySelector(tabs_contents_id).style.display = 'block';
 							return false; 
 						} );
@@ -137,7 +139,7 @@ var SimpleTab = function()
 					{
 						var item = _thisprev.item_Prev(_thisprev.tabList, _thisprev.tabs_active);
 						if (item) {
-							item.querySelector("."+_thisprev.tabs_alink).click();
+							item.querySelector("a").click();
 						}	
 						return false;
 					} );	
@@ -152,7 +154,7 @@ var SimpleTab = function()
 					{
 						var item = _thisnext.item_Next(_thisnext.tabList, _thisnext.tabs_active);
 						if (item) {
-							item.querySelector("."+_thisnext.tabs_alink).click();
+							item.querySelector("a").click();
 						}	
 						return false;
 					} );	

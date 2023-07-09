@@ -1,17 +1,6 @@
-
 /* menu-sub */
 .submenuopen .submenu {
 	display: block;
-}
-
-.menu_right {
-	float: right;
-	padding: 0px 3px 0px 0px;
-}
-
-.menu_right form,
-.menu_right form span {
-	font-size: 12px;
 }
 
 .nav {
@@ -46,12 +35,18 @@
     list-style: none;
 	font-size: 16px;
 }
+.nav ul li.menu_right {
+	float: right;
+	padding: 0px 3px 0px 0px;
+}
+
 .nav ul li span {
 	font-size: 16px;
 }
 
 .nav a {
 	text-decoration: none;
+	font-size: 16px;
 }
 
 .nav ul li a {
@@ -232,11 +227,18 @@
 
 .menucol-inner {
 	padding: 5px;
+	font-size: 16px;
 }
 
 .submenu {
 	font-size: 16px;
 }
+.submenu div {
+	font-size: 16px;
+}
+.menucol-inner ul {
+	font-size: 16px;
+}	
 
 .submenu h3 {
 	color: #555;
@@ -262,7 +264,7 @@
 	font-size: 100%;
 }
 
-.menucolumns .menucol-inner ul {
+.menucol-inner ul {
 	padding: 0px 0px 0px 0px;
 	margin: 0;
 }	

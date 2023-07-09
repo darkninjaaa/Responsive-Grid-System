@@ -1,4 +1,3 @@
-
 .tabs_wrapper {
 	-moz-box-shadow: 0 0 2px #ccc;
 	-webkit-box-shadow: 0 0 2px #ccc;
@@ -14,18 +13,59 @@
 	padding: 1px 1px 1px 1px;
 }
 
-.tabs_contents_container {
-	border: 1px solid #ccc;
-	border-top: none;
-	padding: 3px;
-}
-
-.tabs_contents {
-	display: none;
-}
-
-.tabs_container {
+.tabs_list_outer {
 	border-bottom: 1px solid #ccc;
+}
+
+.tabs_list_container {
+	padding: 5px 0 4px 0;
+	margin: 0 0 0 10px;
+}
+
+.tabs_list .tabs_pull_right span {
+	display: inline;
+	background-color: #eeeeee;
+}
+
+.tabs_list {
+	display: inline;
+}
+
+.tabs_list a {
+	border: 1px solid #ccc;
+	padding: 4px 6px;
+	text-decoration: none;
+	background-color: #eeeeee;
+	border-bottom: none;
+	outline: none;
+	-moz-border-radius: 5px 5px 0 0;
+	-webkit-border-top-left-radius: 5px;
+	-webkit-border-top-right-radius: 5px;
+	border-radius: 5px 5px 0 0;
+}
+
+.tabs_list a:hover {
+	background-color: #dddddd;
+}
+
+.tabs_list.active a {
+	border-bottom: 1px solid #fff;
+	background-color: #fff;
+	padding: 4px 6px 5px 6px;
+}
+
+.tabs_list.active a:hover {
+}
+
+.tabs_list a.icon_accept {
+	background-image: url('accept.png');
+	background-position: 5px;
+	background-repeat: no-repeat;
+	padding-left: 24px;
+}
+
+.tabs_list a.icon_accept:hover {
+	padding-left: 24px;
 }
 
 .tabs_pull_right {
@@ -38,56 +78,12 @@
   vertical-align: middle;
 }
 
-.tabs {
-	list-style: none;
-	padding: 5px 0 4px 0;
-	margin: 0 0 0 10px;
-	font: 0.75em arial;
-}
-
-.tabs div span {
-	display: inline;
-	background-color: #eeeeee;
-}
-
-.tabs li {
-	display: inline;
-}
-
-.tabs li a {
+.tabs_content_container {
 	border: 1px solid #ccc;
-	padding: 4px 6px;
-	text-decoration: none;
-	background-color: #eeeeee;
-	border-bottom: none;
-	outline: none;
-	border-radius: 5px 5px 0 0;
-	-moz-border-radius: 5px 5px 0 0;
-	-webkit-border-top-left-radius: 5px;
-	-webkit-border-top-right-radius: 5px;
+	border-top: none;
+	padding: 3px;
 }
 
-.tabs li a:hover {
-	background-color: #dddddd;
+.tabs_content {
+	display: none;
 }
-
-.tabs li.active a {
-	border-bottom: 1px solid #fff;
-	background-color: #fff;
-	padding: 4px 6px 5px 6px;
-}
-
-.tabs li.active a:hover {
-}
-
-.tabs li a.icon_accept {
-	background-image: url('accept.png');
-	background-position: 5px;
-	background-repeat: no-repeat;
-	padding-left: 24px;
-}
-
-.tabs li a.icon_accept:hover {
-	padding-left: 24px;
-}
-

@@ -1,10 +1,9 @@
 
 <div class="top-wrapper" id="top_wrapper">
-	<div class="nav clearfix">
+	<div class="nav">
 		<div id="nav-button" class="nav-button">nav button</div>
 		<ul id="nav-ul" class="nav-ul submenu">
 			<li><a href="<?php echo HTTP_ROOT; ?>/"  hyperlink="true" target_blank="false"><span>Home</span></a></li>
-			</li>	
 			<li><a><span class="hassubmenu">php</span></a>
 				<ul class="submenu">
 					<li><a href="<?php echo ROOT_PATH.'/'.'home'; ?>">Home</a></li>
@@ -55,8 +54,8 @@
 			</li>
 			<li><a><span class="hassubmenu">Etc</span></a>
 				<ul class="submenu">
-					<div class="menucolumns"> 
-						<div class="menucolumn-12 clearfix">
+					<li class="menucolumns"> 
+						<div class="menucolumn-12">
 							<div class="menucol-12 menucol highlighted">
 								<div class="menucol-inner"> 
 									Tomatoes
@@ -73,15 +72,20 @@
 							<div class="menucol-3 menucol">
 								<div class="menucol-inner"> 
 									<h5>def</h5>
-									<ul>
-										<li><a>Apple</a></li>
-									</ul>
+									<div>
+										<div><a target="_blank" href="https://www.youtube.com/results?search_query=grafting+tree">grafting tree</a></div>
+										<div><a>Apple</a></div>
+										<div><a>Apple</a></div>
+										<div><a>Apple</a></div>
+									</div>
 								</div>	
 							</div>
 							<div class="menucol-3 menucol">
 								<div class="menucol-inner"> 
 									<h5>ghi</h5>
 									<ul>
+										<li><a target="_blank" href="https://www.youtube.com/results?search_query=grafting+tree">grafting tree</a></li>
+										<li><a>Banana</a></li>
 										<li><a>Banana</a></li>
 									</ul>
 								</div>	
@@ -90,18 +94,17 @@
 								<div class="menucol-inner"> 
 									<h5>zzz</h5>
 									<ul>
+										<li><a target="_blank" href="https://www.youtube.com/results?search_query=grafting+tree">grafting tree</a></li>
 										<li><a>Grape</a></li>
 									</ul>
 								</div>	
 							</div>
 						</div>	
-					</div>	
+					</li>	
 				</ul>	
 			</li>
 			<li><a><span>About</span></a></li>
-			<div class="menu_right">
-				who am i ?
-			</div>
+			<li class="menu_right">who am i ?</li>
 		</ul>
 	</div>
 </div>
