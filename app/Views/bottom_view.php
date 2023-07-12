@@ -50,16 +50,10 @@
         });
 	</script>
 
-	<script type="text/javascript" src="<?php echo HTTP_ROOT.JS_PATH; ?>/simple-tab.js"></script>
+	<script type="text/javascript" src="<?php echo HTTP_ROOT.JS_PATH; ?>/simple-tabs.js"></script>
 	<script type="text/javascript" charset="utf-8">
-        let simpletab = new SimpleTab({ 
-			tabs_list_container : "tabs_list_container",
-			tabs_list : "tabs_list",
-			tabs_prev : "tabs_prev",
-			tabs_next : "tabs_next",
-			tabs_active : "active",
-			tabs_content_container : "tabs_content_container",
-			tabs_content : "tabs_content",
+        let tabs_info = new SimpleTab({ 
+			tabs_id : "tabs_info"
 		});
 	</script>
 
