@@ -1,3 +1,4 @@
+
 .tabs_wrapper {
 	-moz-box-shadow: 0 0 2px #ccc;
 	-webkit-box-shadow: 0 0 2px #ccc;
@@ -68,14 +69,16 @@
 	padding-left: 24px;
 }
 
-.tabs_pull_right {
+.tabs_nav {
   float: right !important;
-  right: 0;
-  left: auto;
-  margin-right: 0;
+  padding: 0px 3px 0px 0px;
   position: relative;
-  display: inline-block;
+  display: block;
   vertical-align: middle;
+}
+  
+.tabs_nav a:focus {
+  background-color: transparent;
 }
 
 .tabs_content_container {
