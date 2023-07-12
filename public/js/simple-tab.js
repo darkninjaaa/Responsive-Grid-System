@@ -1,11 +1,11 @@
+
+var TABS_ID = "tabs_id";
 var TABS_LIST_CONTAINER = "tabs_list_container";
 var TABS_LIST = "tabs_list";
-
+var TABS_NAV = "tabs_nav";
 var TABS_PREV = "tabs_prev";
 var TABS_NEXT = "tabs_next";
-
 var TABS_ACTIVE = "active";
-
 var TABS_CONTENT_CONTAINER = "tabs_content_container";
 var TABS_CONTENT = "tabs_content";
 
@@ -76,8 +76,10 @@ var SimpleTab = function()
         _classCallCheck(this, SimpleTab);
 		
         _extends(this, {
+			tabs_id : TABS_ID,
 			tabs_list_container : TABS_LIST_CONTAINER,
 			tabs_list : TABS_LIST,
+			tabs_nav : TABS_NAV,
 			tabs_prev : TABS_PREV,
 			tabs_next : TABS_NEXT,
 			tabs_active : TABS_ACTIVE,
@@ -85,11 +87,13 @@ var SimpleTab = function()
 			tabs_content : TABS_CONTENT,
         }, options);
 
-		this.tabs_list_container = document.getElementById(this.tabs_list_container);
-		this.tabs_content_container = document.getElementById(this.tabs_content_container);
+		this.tabs = document.getElementById(this.tabs_id);
 
-		this.tabList = this.tabs_list_container.querySelectorAll("."+this.tabs_list);
-		this.contentList = this.tabs_content_container.querySelectorAll("."+this.tabs_content);
+		this.tabs_list_container = this.tabs.querySelector("." + this.tabs_list_container);
+		this.tabs_content_container = this.tabs.querySelector("." + this.tabs_content_container);
+
+		this.tabList = this.tabs_list_container.querySelectorAll("." + this.tabs_list);
+		this.contentList = this.tabs_content_container.querySelectorAll("." + this.tabs_content);
 
         this.init();
     }
@@ -134,13 +138,17 @@ var SimpleTab = function()
 				key: "setListner_Prevclick",
 				value: function setListner_Prevclick() {
 					var _thisprev = this;
-					var tabs_prev = document.getElementById(this.tabs_prev);
-					tabs_prev.addEventListener('click', function(event) 
+					
+					var tabsnav = _thisprev.tabs.querySelector("." + _thisprev.tabs_nav);
+					var tabsprev = tabsnav.querySelector("." + _thisprev.tabs_prev);
+
+					tabsprev.addEventListener('click', function(event) 
 					{
 						var item = _thisprev.item_Prev(_thisprev.tabList, _thisprev.tabs_active);
 						if (item) {
 							item.querySelector("a").click();
 						}	
+						//event.target.style.backgroundColor = "transparent";
 						return false;
 					} );	
 				}
@@ -149,13 +157,17 @@ var SimpleTab = function()
 				key: "setListner_Nextclick",
 				value: function setListner_Nextclick() {
 					var _thisnext = this;
-					var tabs_next = document.getElementById(this.tabs_next);
-					tabs_next.addEventListener('click', function(event) 
+
+					var tabsnav = _thisnext.tabs.querySelector("." + _thisnext.tabs_nav);
+					var tabsnext = tabsnav.querySelector("." + _thisnext.tabs_next);
+
+					tabsnext.addEventListener('click', function(event) 
 					{
 						var item = _thisnext.item_Next(_thisnext.tabList, _thisnext.tabs_active);
 						if (item) {
 							item.querySelector("a").click();
 						}	
+						//event.target.style.backgroundColor = "transparent";
 						return false;
 					} );	
 				}
