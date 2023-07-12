@@ -11,7 +11,7 @@
 	<link rel="stylesheet" type="text/css" href="<?php echo HTTP_ROOT.CSS_PATH; ?>/menu.css"; />
 	<link rel="stylesheet" type="text/css" href="<?php echo HTTP_ROOT.CSS_PATH; ?>/grids_24.css"; />
 	<link rel="stylesheet" type="text/css" href="<?php echo HTTP_ROOT.CSS_PATH; ?>/handy-collapse.css"; />
-	<link rel="stylesheet" type="text/css" href="<?php echo HTTP_ROOT.CSS_PATH; ?>/simple-tab.css"; />
+	<link rel="stylesheet" type="text/css" href="<?php echo HTTP_ROOT.CSS_PATH; ?>/simple-tabs.css"; />
 
 	<style type="text/css">
 		<?php if ($grids_name != "grids" || $grids_columns != 24) echo $grid_css; ?>
