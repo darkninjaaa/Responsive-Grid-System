@@ -52,8 +52,11 @@
 
 	<script type="text/javascript" src="<?php echo HTTP_ROOT.JS_PATH; ?>/simple-tabs.js"></script>
 	<script type="text/javascript" charset="utf-8">
-        let tabs_info = new SimpleTab({ 
+        let tabs_info = new SimpleTabs({ 
 			tabs_id : "tabs_info"
+		});
+        let tabs_ci = new SimpleTabs({ 
+			tabs_id : "tabs_ci"
 		});
 	</script>
 
