@@ -67,13 +67,13 @@ if (!_classCallCheck) {
 	}	
 }
 
-var SimpleTab = function() 
+var SimpleTabs = function() 
 {
-    function SimpleTab() 
+    function SimpleTabs() 
 	{
         var options = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 		
-        _classCallCheck(this, SimpleTab);
+        _classCallCheck(this, SimpleTabs);
 		
         _extends(this, {
 			tabs_id : TABS_ID,
@@ -98,7 +98,7 @@ var SimpleTab = function()
         this.init();
     }
 	
-    _createClass( SimpleTab, 
+    _createClass( SimpleTabs, 
 		[	
 			{
 				key: "init",
@@ -218,9 +218,9 @@ var SimpleTab = function()
 		]
 	);
     
-	return SimpleTab;
+	return SimpleTabs;
 }();
 
 if ((typeof module === "undefined" ? "undefined" : _typeof(module)) === 'object') {
-    module.exports = SimpleTab;
+    module.exports = SimpleTabs;
 }
