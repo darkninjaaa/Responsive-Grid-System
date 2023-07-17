@@ -38,8 +38,8 @@
 	-webkit-border-radius: 3px;
 }
 
-.handy-panel > button,
-.handy-subpanel > button
+.handy-panel > button:first-of-type,
+.handy-subpanel > button:first-of-type
 {
 	margin: 0px;
 	padding: 2px 2px 2px 5px;
@@ -49,14 +49,14 @@
 	-webkit-border-radius: 3px;
 }
 
-.handy-panel > button:hover,
-.handy-subpanel > button:hover { 
+.handy-panel > button:first-of-type:hover,
+.handy-subpanel > button:first-of-type:hover { 
 	background-color: #A9BCEF; 
 	cursor:pointer;
 }
 
-.handy-panel.collapsed > button,
-.handy-subpanel.collapsed > button
+.handy-panel.collapsed > button:first-of-type,
+.handy-subpanel.collapsed > button:first-of-type
 {
 	margin: 0px;
 	padding: 2px 2px 2px 5px;
@@ -66,8 +66,8 @@
 	-webkit-border-radius: 3px;
 }
 
-.handy-panel.collapsed > button:hover,
-.handy-subpanel.collapsed > button:hover
+.handy-panel.collapsed > button:first-of-type:hover,
+.handy-subpanel.collapsed > button:first-of-type:hover
 {
 	margin: 0px;
 	padding: 2px 2px 2px 5px;
