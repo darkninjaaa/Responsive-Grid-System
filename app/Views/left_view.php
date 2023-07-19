@@ -6,7 +6,7 @@
 				<div class="handy-panel left expand">
 					<button type="button" class="button is-fullwidth" data-left-button="height">height</button>
 					<div class="handy-panelcontent is-1" data-left-content="height">
-						<textarea id="disp_height" name="disp_height" class="disp_height" rows="23" placeholder="disp_height">disp_height</textarea>
+						<textarea id="disp_height" name="disp_height" class="disp_height" rows="24" placeholder="disp_height" spellcheck="false">disp_height</textarea>
 					</div>
 				</div>
 				
@@ -30,7 +30,7 @@
 							<div class="tabs_content_container">
 								<div id="tabs_info_seg" class="tabs_content">
 									<?php
-										echo "TotalSegments : ".$TotalSegments."br>";
+										echo "TotalSegments : ".$TotalSegments."<br>";
 										echo "seg_controller : ".$seg_controller."<br>";
 										echo "seg_func : ".$seg_func."<br>";
 										echo "seg_table : ".$seg_table."<br>";

@@ -44,6 +44,10 @@
             nameSpace: "left",
             closeOthers: false
         });
+        let handy_main = new HandyCollapse({
+            nameSpace: "main",
+            closeOthers: false
+        });
         let handy_right = new HandyCollapse({
             nameSpace: "right",
             closeOthers: false
@@ -65,6 +69,11 @@
 			document.getElementById("disp_height").innerHTML  = txt;
 		}
 
+		function px2num(val) {
+			val = +Number(val.replace('px', '')) || 0
+			return val;
+		}
+
 		function isScrollable() {
 			var h = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight; 
 			
@@ -76,16 +85,20 @@
 
 		function setheight_main_view_wrapper() {
 			var main_view_wrapper = document.getElementById('main_view_wrapper');
-			var main_view_wrapper_h = window.getComputedStyle(main_view_wrapper).height;
+		
 			var sh = screen.height;  
 			var wih = window.innerHeight;
+
+			//<div id="nav" class="nav clearfix">
+			//<div id="main_view_wrapper" class="main-view-wrapper clearfix">
 			var tw = document.getElementById('top_wrapper');
-			var tw_h = window.getComputedStyle(tw).height;
+			var tw_h = px2num(window.getComputedStyle(tw,null).getPropertyValue('height'));
+
+			var mv = document.getElementById('main_view_wrapper');
+			var mv_h = px2num(window.getComputedStyle(mv,null).getPropertyValue('height'));
+
 			var bw = document.getElementById('bottom_wrapper');
-			var bw_h = window.getComputedStyle(bw).height;
-			tw_h = Number(tw_h.replace('px', ''));
-			main_view_wrapper_h = Number(main_view_wrapper_h.replace('px', ''));
-			bw_h = Number(bw_h.replace('px', ''));
+			var bw_h = px2num(window.getComputedStyle(bw,null).getPropertyValue('height'));
 
 			var wr_h = wih - tw_h - bw_h - 10;
 
@@ -96,7 +109,7 @@
 
 			panels_h = panels_lswrsw_h;
 
-			var wrapper_h = (main_view_wrapper_h > wr_h) ? main_view_wrapper_h : wr_h;
+			var wrapper_h = (mv_h > wr_h) ? mv_h : wr_h; //? mv_h <= mv_h - (main-view handy-pannel-low count * 4(?));
 			wrapper_h = (wrapper_h > panels_h) ? wrapper_h : panels_h;
 
 			var twrb_h = tw_h + wrapper_h + bw_h;
@@ -115,17 +128,19 @@
 			text += wih + " window h " + "&#13;&#10;";
 			text += "&#13;&#10;";
 
+			text += ret['big'] + " big " + "&#13;&#10;";
 			text += ret['lh'] + " lh " + ret['rh'] + " rh " +  "&#13;&#10;";
 			text += ret['lsw_h'] + " lsw_h " + ret['rsw_h'] + " rsw_h " + "&#13;&#10;";
-			text += ret['big'] + " big " + "&#13;&#10;";
+			text += panels_h + " panels_h " + "&#13;&#10;";
 			text += "&#13;&#10;";
 
 			text += tw_h + " tw_h " + "&#13;&#10;";
-			text += wrapper_h + " wrapper_h " + "&#13;&#10;";
-			text += main_view_wrapper_h + " main_view_wrapper_h " + "&#13;&#10;";
-			text += wr_h + " wr_h " + "&#13;&#10;";
-			text += panels_h + " panels_h " + "&#13;&#10;";
+			text += mv_h + " mv_h " + "&#13;&#10;";
 			text += bw_h + " bw_h " + "&#13;&#10;";
+			text += wr_h + " wr_h " + "&#13;&#10;";
+			text += "&#13;&#10;";
+
+			text += wrapper_h + " wrapper_h " + "&#13;&#10;";
 			text += "&#13;&#10;";
 
 			text += twrb_h + " twrb_h " + "&#13;&#10;";
@@ -136,78 +151,82 @@
 			text += document.body.scrollHeight + " scrollHeight " + "&#13;&#10;";
 			text += h + " h " + "&#13;&#10;";
 
-			text += (isScrollable() ? 'scrollable' : 'none') + "&#13;&#10;";;
+			text += (isScrollable() ? 'scrollable' : 'scrollable none') + "&#13;&#10;";;
 
-			if (wih >= twrb_h) { 
-				if (isScrollable()) {
-					if (wrapper_h > panels_h) {
-						wrapper_h += 2;
+			var setheight_mv = function() {
+				if (wih >= twrb_h) { 
+					if (isScrollable()) {
+						if (wrapper_h > panels_h) {
+							wrapper_h += 0;
+							main_view_wrapper.style.height = wrapper_h + 'px';
+							text += wrapper_h + " 111 " + "&#13;&#10;";
+						}
+						else {
+							panels_h += 2;
+							main_view_wrapper.style.height = panels_h + 'px';
+							text += panels_h + " 112 " + "&#13;&#10;";
+						}		
+					}
+					else {
+						wrapper_h -= 0;
 						main_view_wrapper.style.height = wrapper_h + 'px';
-						text += wrapper_h + " 111 " + "&#13;&#10;";
-					}
-					else {
-						panels_h += 2;
-						main_view_wrapper.style.height = panels_h + 'px';
-						text += panels_h + " 112 " + "&#13;&#10;";
-					}		
-				}
-				else {
-					main_view_wrapper.style.height = wrapper_h + 'px';
-					text += wrapper_h + " 12 " + "&#13;&#10;";
-				}	
-			}	
-			else {	
-				if (wih >= twr_h) { 
-					if (isScrollable()) {
-						if (wrapper_h > panels_h) {
-							main_view_wrapper.style.height = wrapper_h + 'px';
-							text += wrapper_h + " 211 " + "&#13;&#10;";
-						}	
-						else {
-							if (ret['lh']>ret['rh']) {
-								panels_h += 2;
-								main_view_wrapper.style.height = panels_h + 'px';
-								text += panels_h + " 2121 " + "&#13;&#10;";
-							}
-							else {
-								panels_h += 2;
-								main_view_wrapper.style.height = panels_h + 'px';
-								text += panels_h + " 2122 " + "&#13;&#10;";
-							}	
-						}	
-					}
-					else {
-						main_view_wrapper.style.height = twr_h + 'px';
-						text += twr_h + " 221 " + "&#13;&#10;";
+						text += wrapper_h + " 12 " + "&#13;&#10;";
 					}	
 				}	
-				else {
-					if (isScrollable()) {
-						if (wrapper_h > panels_h) {
-							main_view_wrapper.style.height = wrapper_h + 'px';
-							text += wrapper_h + " 231 " + "&#13;&#10;";
-						}	
-						else {
-							if (ret['lh']>ret['rh']) {
-								panels_h += 2;
-								main_view_wrapper.style.height = panels_h + 'px';
-								text += panels_h + " 2321 " + "&#13;&#10;";
-							}
-							else {
-								panels_h += 2;
-								main_view_wrapper.style.height = panels_h + 'px';
-								text += panels_h + " 2322 " + "&#13;&#10;";
+				else {	
+					if (wih >= twr_h) { 
+						if (isScrollable()) {
+							if (wrapper_h > panels_h) {
+								main_view_wrapper.style.height = wrapper_h + 'px';
+								text += wrapper_h + " 211 " + "&#13;&#10;";
 							}	
+							else {
+								if (ret['lh']>ret['rh']) {
+									panels_h += 2;
+									main_view_wrapper.style.height = panels_h + 'px';
+									text += panels_h + " 2121 " + "&#13;&#10;";
+								}
+								else {
+									panels_h += 2;
+									main_view_wrapper.style.height = panels_h + 'px';
+									text += panels_h + " 2122 " + "&#13;&#10;";
+								}	
+							}	
+						}
+						else {
+							main_view_wrapper.style.height = twr_h + 'px';
+							text += twr_h + " 221 " + "&#13;&#10;";
 						}	
 					}	
 					else {
-						//panels_h += 2;
-						main_view_wrapper.style.height = panels_h + 'px';
-						text += panels_h + " 24 " + "&#13;&#10;";
+						if (isScrollable()) {
+							if (wrapper_h > panels_h) {
+								main_view_wrapper.style.height = wrapper_h + 'px';
+								text += wrapper_h + " 231 " + "&#13;&#10;";
+							}	
+							else {
+								if (ret['lh']>ret['rh']) {
+									panels_h += 2;
+									main_view_wrapper.style.height = panels_h + 'px';
+									text += panels_h + " 2321 " + "&#13;&#10;";
+								}
+								else {
+									panels_h += 2;
+									main_view_wrapper.style.height = panels_h + 'px';
+									text += panels_h + " 2322 " + "&#13;&#10;";
+								}	
+							}	
+						}	
+						else {
+							//panels_h += 2;
+							main_view_wrapper.style.height = panels_h + 'px';
+							text += panels_h + " 24 " + "&#13;&#10;";
+						}	
 					}	
 				}	
 			}	
 
+			setheight_mv();
 			disp_height(text);
 		}
 	</script>
