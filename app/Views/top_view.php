@@ -5,7 +5,7 @@
 	<title><?php if (isset($title)) echo strip_tags($title); ?></title>
     <meta name="description" content="The small framework with powerful features">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" type="image/png" href="/favicon.ico">
+    <link rel="shortcut icon" type="image/png" href="<?php echo HTTP_ROOT; ?>/favicon.ico">
 
 	<link rel="stylesheet" type="text/css" href="<?php echo HTTP_ROOT.CSS_PATH; ?>/common.css"; />
 	<link rel="stylesheet" type="text/css" href="<?php echo HTTP_ROOT.CSS_PATH; ?>/menu.css"; />
