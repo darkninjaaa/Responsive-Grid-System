@@ -2,8 +2,8 @@
 	<div class="grids_col grids_16_of_24">
 		<div id="main_view_wrapper" class="main-view-wrapper clearfix">
 
-<div class="grids_col grids_24_of_24">
 <div id="main_view_net" class="main-view-net clearfix">
+<div class="grids_col grids_24_of_24">
 
 <!-- HEADER: MENU + HEROE SECTION -->
 <header>
@@ -129,8 +129,8 @@
     }
 </script>
 
-</div><!--main-view-net-->
 </div><!--grids_24_of_24-->
+</div><!--main-view-net-->
 
 <div class="grids_col grids_24_of_24">
 	<div id="main_view_dummy" class="main-view-dummy clearfix">
