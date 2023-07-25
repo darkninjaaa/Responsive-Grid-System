@@ -96,18 +96,18 @@
 			var bw = document.getElementById('bottom_wrapper');
 			var bw_h = px2num(window.getComputedStyle(bw,null).getPropertyValue('height'));
 			var lswrsw_h = (lsw_h>rsw_h) ? lsw_h : rsw_h;
-			var wr_h = wih - tw_h - bw_h - 10;
+			var mvr_h = wih - tw_h - bw_h - 10;
 
 			if (ar == '')
-				wr_h = wih - tw_h - bw_h - 10;
+				mvr_h = wih - tw_h - bw_h - 10;
 
-			if (wr_h > lswrsw_h) {
-				if (wr_h > mvnet_h) {
-					mvdummy_h = wr_h - mvnet_h;
+			if (mvr_h > lswrsw_h) {
+				if (mvr_h > mvnet_h) {
+					mvdummy_h = mvr_h - mvnet_h;
 				}
 			}				
-			else if (wr_h > mvnet_h) {
-				mvdummy_h = wr_h - mvnet_h;
+			else if (mvr_h > mvnet_h) {
+				mvdummy_h = mvr_h - mvnet_h;
 			}	
 
 			var mvnew_h = mvnet_h + mvdummy_h;
@@ -127,7 +127,7 @@
 			text += mvnet_h + " mvnet_h " + "&#13;&#10;";
 			text += mvdummy_h + " mvdummy_h " + "&#13;&#10;";
 			text += mvnew_h + " mvnew_h " + "&#13;&#10;";
-			text += wr_h + " wr_h " + "&#13;&#10;";
+			text += mvr_h + " mvr_h " + "&#13;&#10;";
 			text += lsw_h + " " + rsw_h + " lsw_h rsw_h " + "&#13;&#10;";
 			text += bw_h + " bw_h " + "&#13;&#10;";
 			text += ar + " " + position + "&#13;&#10;";
