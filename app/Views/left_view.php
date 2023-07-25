@@ -3,13 +3,6 @@
 			<div class="left-sidebar-wrapper" id="left_sidebar_wrapper">
 				<h4><?php echo "left is here." ?></h4>
 
-				<div class="handy-panel left expand">
-					<button type="button" class="button is-fullwidth" data-left-button="height">height</button>
-					<div class="handy-panelcontent is-1" data-left-content="height">
-						<textarea id="disp_height" name="disp_height" class="disp_height" rows="24" placeholder="disp_height" spellcheck="false">disp_height</textarea>
-					</div>
-				</div>
-				
 				<div class="handy-panel left collapsed">
 					<button type="button" class="button is-fullwidth" data-left-button="info">info</button>
 					<div class="handy-panelcontent is-1" data-left-content="info">
@@ -67,5 +60,12 @@
 					</div>
 				</div>
 				
+				<div class="handy-panel left expand">
+					<button type="button" class="button is-fullwidth" data-left-button="height">height</button>
+					<div class="handy-panelcontent is-1" data-left-content="height">
+						<textarea id="disp_height" name="disp_height" class="disp_height" rows="26" placeholder="disp_height" spellcheck="false">disp_height</textarea>
+					</div>
+				</div>
+
 			</div>
 		</div>

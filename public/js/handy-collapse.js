@@ -1,24 +1,33 @@
 
-var HANDY_PANEL           = "handy-panel";
-var HANDY_SUBPANEL        = "handy-subpanel";
-var HANDY_PANELCONTENT    = "handy-panelcontent";
+var HANDY_PANEL            = "handy-panel";
+var HANDY_SUBPANEL         = "handy-subpanel";
+var HANDY_PANELCONTENT     = "handy-panelcontent";
 
-var HANDY_NAMESPACE_HEAD  = "data"
-var HANDY_NAMESPACE       = "basic"
-var HANDY_HEADING_TAG     = "button";
-var HANDY_CONTENT_TAG     = "content";
+var HANDY_NAMESPACE_HEAD   = "data";
+var HANDY_NAMESPACE        = "basic";
 
-var HANDY_EXPAND_CLASS    = "expand";
-var HANDY_COLLAPSED_CLASS = "collapsed";
+var HANDY_NAMESPACE_LEFT   = "left";
+var HANDY_NAMESPACE_NESTED = "nested";
+var HANDY_NAMESPACE_MROW   = "mainrow";
+var HANDY_NAMESPACE_MLEFT  = "mainleft";
+var HANDY_NAMESPACE_MRIGHT = "mainright";
+var HANDY_NAMESPACE_MNLEFT  = "mainnleft";
+var HANDY_NAMESPACE_MNRIGHT = "mainnright";
+var HANDY_NAMESPACE_RIGHT  = "right";
+var HANDY_NAMESPACE_NPARENT = "nestedparent";
+var HANDY_NAMESPACE_NCHILD  = "nestedchild";
 
-var HANDY_COOKIE_NAME     = "handy-panels";
-var HANDY_CSS_EASING      = "ease-in-out";
+var HANDY_HEADING_TAG      = "button";
+var HANDY_CONTENT_TAG      = "content";
 
-var HANDY_ANIMATION_DELAY = 400; /*ms*/
-var HANDY_ANIMATION_STEPS = 10;
+var HANDY_EXPAND_CLASS     = "expand";
+var HANDY_COLLAPSED_CLASS  = "collapsed";
 
-var HANDY_PANEL_LEFT      = "left";
-var HANDY_PANEL_RIGHT     = "right";
+var HANDY_COOKIE_NAME      = "handy-panels";
+var HANDY_CSS_EASING       = "ease-in-out";
+
+var HANDY_ANIMATION_DELAY  = 400; /*ms*/
+var HANDY_DISPLAY_DELAY    = 0; /*ms*/
 
 if (!_typeof) {
 	var _typeof = 
@@ -77,50 +86,6 @@ if (!_classCallCheck) {
 	}	
 }
 
-function getHandyPanelsHeight()
-{
-	var panelsList = document.getElementsByClassName(HANDY_PANEL);
-	var panelsleft = new Array();
-	var panelsright = new Array();
-	var lh = 0;
-	var rh = 0;
-	var panel;
-
-	for (var i=0; i<panelsList.length; i++)
-	{
-		panel = panelsList[i];
-		if (panel.classList.contains(HANDY_PANEL_LEFT)) {
-			lh += panel.offsetHeight;
-		}	
-		else if (panel.classList.contains(HANDY_PANEL_RIGHT)) {
-			rh += panel.offsetHeight;
-		}	
-	}
-	
-	var lsw = document.getElementById('left_sidebar_wrapper');
-	var lsw_h = window.getComputedStyle(lsw).height;
-	lsw_h = Number(lsw_h.replace('px', ''));
-
-	var rsw = document.getElementById('right_sidebar_wrapper');
-	var rsw_h = window.getComputedStyle(rsw).height;
-	rsw_h = Number(rsw_h.replace('px', ''));
-
-	var big_lr = (lh>rh) ? lh : rh;
-	var big_lswrsw = (lsw_h>rsw_h) ? lsw_h : rsw_h;
-	var big = (big_lr>big_lswrsw) ? big_lr : big_lswrsw;
-
-    var ret = [];
-	ret['lh'] = lh;
-	ret['rh'] = rh;
-	ret['lsw_h'] = lsw_h;
-	ret['rsw_h'] = rsw_h;
-	ret['big_lr'] = big_lr;
-	ret['big_lswrsw'] = big_lswrsw;
-	ret['big'] = big;
-
-	return ret;
-}
-
 var HandyCollapse = function() 
 {
     function HandyCollapse() 
@@ -131,13 +96,25 @@ var HandyCollapse = function()
 		
         _extends(this, {
             nameSpace: (options.nameSpace || HANDY_NAMESPACE), 
+            nameSpaceLeft: (options.nameSpaceLeft || HANDY_NAMESPACE_LEFT), 
+            nameSpaceNested: (options.nameSpaceNested || HANDY_NAMESPACE_NESTED), 
+            nameSpaceMrow: (options.nameSpaceMrow || HANDY_NAMESPACE_MROW), 
+            nameSpaceMleft: (options.nameSpaceMleft || HANDY_NAMESPACE_MLEFT), 
+            nameSpaceMright: (options.nameSpaceMright || HANDY_NAMESPACE_MRIGHT), 
+            nameSpaceMnleft: (options.nameSpaceMnleft || HANDY_NAMESPACE_MNLEFT), 
+            nameSpaceMnright: (options.nameSpaceMnright || HANDY_NAMESPACE_MNRIGHT), 
+            nameSpaceRight: (options.nameSpaceRight || HANDY_NAMESPACE_RIGHT), 
+            nameSpaceNparent: (options.nameSpaceNparent || HANDY_NAMESPACE_NPARENT), 
+            nameSpaceNchild: (options.nameSpaceNchild || HANDY_NAMESPACE_NCHILD), 
             toggleHeadingAttr: HANDY_NAMESPACE_HEAD + "-" + (options.nameSpace || HANDY_NAMESPACE) + "-" + HANDY_HEADING_TAG,
             toggleContentAttr: HANDY_NAMESPACE_HEAD + "-" + (options.nameSpace || HANDY_NAMESPACE) + "-" + HANDY_CONTENT_TAG,
             isAimation: true,
             closeOthers: true,
-            animatinSpeed: HANDY_ANIMATION_DELAY,
+            animationDelay: HANDY_ANIMATION_DELAY,
+			displayDelay: HANDY_DISPLAY_DELAY,
             cssEasing: HANDY_CSS_EASING,
 			cookie_name : HANDY_COOKIE_NAME + "-" + (options.nameSpace || HANDY_NAMESPACE),
+            onToggleSlide: (options.onToggleSlide || false), 
             onSlideStart: function onSlideStart() {
                 return false;
             },
@@ -263,13 +240,13 @@ var HandyCollapse = function()
 			{
 				key: "setListner",
 				value: function setListner() {
-					var _this2 = this;
+					var _this = this;
 					Array.prototype.slice.call(this.toggleHeadingEls).forEach(function(buttonEl, index) {
-						var id = buttonEl.getAttribute(_this2.toggleHeadingAttr);
+						var id = buttonEl.getAttribute(_this.toggleHeadingAttr);
 						if (id) {
 							buttonEl.addEventListener("click", function(e) {
 								e.preventDefault();
-								_this2.toggleSlide(id, buttonEl);
+								_this.toggleSlide(id, buttonEl);
 							}, false);
 						}
 					});
@@ -278,7 +255,6 @@ var HandyCollapse = function()
 			{
 				key: "setItem",
 				value: function setItem() {
-					var _this = this;
 					Array.prototype.slice.call(this.toggleContentEls).forEach(function(contentEl) {
 						contentEl.style.maxHeight = "none";
 					});
@@ -313,14 +289,14 @@ var HandyCollapse = function()
 			{
 				key: "refresh",
 				value: function refresh() {
-					var _this2 = this;
+					var _this = this;
 					Array.prototype.slice.call(this.toggleHeadingEls).forEach(function(buttonEl, index) {
-						var id = buttonEl.getAttribute(_this2.toggleHeadingAttr);
+						var id = buttonEl.getAttribute(_this.toggleHeadingAttr);
 						if (id) {
 
 							// look for the id in loaded settings, apply the normal/collapsed class
-							if (_this2.itemsStatus.hasOwnProperty(id)) {
-								if (_this2.itemsStatus[id] == HANDY_EXPAND_CLASS) {
+							if (_this.itemsStatus.hasOwnProperty(id)) {
+								if (_this.itemsStatus[id] == HANDY_EXPAND_CLASS) {
 									buttonEl.parentNode.classList.remove(HANDY_COLLAPSED_CLASS);
 									buttonEl.parentNode.classList.add(HANDY_EXPAND_CLASS);
 								}	
@@ -331,18 +307,18 @@ var HandyCollapse = function()
 							}	
 							else {
 								// if no saved setting, see the initial setting
-								_this2.itemsStatus[id] = 
+								_this.itemsStatus[id] = 
 									(buttonEl.parentNode.classList.contains(HANDY_EXPAND_CLASS)) ? HANDY_EXPAND_CLASS : HANDY_COLLAPSED_CLASS;
 							}
 						
 							var expand = buttonEl.parentNode.classList.contains(HANDY_EXPAND_CLASS);
 
-							_this2.setItemStatus(id, expand ? HANDY_EXPAND_CLASS : HANDY_COLLAPSED_CLASS);
+							_this.setItemStatus(id, expand ? HANDY_EXPAND_CLASS : HANDY_COLLAPSED_CLASS);
 							
 							if (expand) {
-								_this2.open(id, false, false);
+								_this.open(id, false, false);
 							} else {
-								_this2.close(id, false, false);
+								_this.close(id, false, false);
 							}
 						}
 					});
@@ -351,28 +327,72 @@ var HandyCollapse = function()
 			{
 				key: "toggleSlide",
 				value: function toggleSlide(id, buttonEl) {
+					var _this = this;
 					var isRunCallback = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
+					var addremove = '';
+					var ar = '';
+					var clientHeight = 0;
+					var delay = 0;
+					var position = '';
 
+					var toggleButton = document.querySelector("[" + this.toggleHeadingAttr + "='" + id + "']");
+					var nestedparentchild = '';
+					if (toggleButton.parentNode.classList.contains(this.nameSpaceNparent))
+						nestedparentchild = 'nestedparent';
+					if (toggleButton.parentNode.classList.contains(this.nameSpaceNchild))
+						nestedparentchild = 'nestedchild';
+
+					if (this.nameSpace.indexOf(this.nameSpaceMleft) != -1) //"mainleft"
+						position = this.nameSpaceMleft;
+					else if (this.nameSpace.indexOf(this.nameSpaceMright) != -1) 
+						position = this.nameSpaceMright;
+					else if (this.nameSpace.indexOf(this.nameSpaceMnleft) != -1) //"mainleft"
+						position = this.nameSpaceMnleft;
+					else if (this.nameSpace.indexOf(this.nameSpaceMnright) != -1) 
+						position = this.nameSpaceMnright;
+					else if (this.nameSpace.indexOf(this.nameSpaceMrow) != -1) // "mainrow"
+						position = this.nameSpaceMrow;
+					else if (this.nameSpace.indexOf(this.nameSpaceLeft) != -1) //"left"
+						position = this.nameSpaceLeft;
+					else if (this.nameSpace.indexOf(this.nameSpaceNested) != -1)
+						position = this.nameSpaceNested;
+					else if (this.nameSpace.indexOf(this.nameSpaceRight) != -1) 
+						position = this.nameSpaceRight;
 					if (this.itemsStatus[id] == HANDY_EXPAND_CLASS) {
 						this.saveSettings(id, HANDY_COLLAPSED_CLASS);
-						this.close(id, isRunCallback, this.isAimation);
+						if (position == this.nameSpaceMleft || position == this.nameSpaceMright || position == this.nameSpaceMrow ||
+							position == this.nameSpaceMnleft || position == this.nameSpaceMnright)
+							addremove = 'remove';
+						ar = 'remove';
+						clientHeight = this.close(id, isRunCallback, this.isAimation);
+						if (nestedparentchild != 'nestedchild')
+							delay = this.animationDelay;
 					} else {
 						this.saveSettings(id, HANDY_EXPAND_CLASS);
-						this.open(id, isRunCallback, this.isAimation);
+						if (position == this.nameSpaceMleft || position == this.nameSpaceMright || position == this.nameSpaceMrow ||
+							position == this.nameSpaceMnleft || position == this.nameSpaceMnright)
+							addremove = 'add';
+						ar = 'add';
+						clientHeight = this.open(id, isRunCallback, this.isAimation);
+					}
+					if (this.onToggleSlide) {
+						if (this.displayDelay != 0)
+							delay = this.displayDelay;
+						setTimeout(function() { _this.onToggleSlide(clientHeight, addremove, ar, position, nestedparentchild); }, delay);
 					}
 				}
 			}, 
 			{
 				key: "open",
 				value: function open(id) {
-					var _this3 = this;
+					var _this = this;
 					var isRunCallback = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
 					var isAimation = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : true;
 					if (!id) return;
 					if (this.closeOthers) {
 						Array.prototype.slice.call(this.toggleHeadingEls).forEach(function(buttonEl, index) {
-							var closeId = buttonEl.getAttribute(_this3.toggleHeadingAttr);
-							if (closeId !== id) _this3.close(closeId, false, isAimation);
+							var closeId = buttonEl.getAttribute(_this.toggleHeadingAttr);
+							if (closeId !== id) _this.close(closeId, false, isAimation);
 						});
 					}
 					if (isRunCallback !== false) this.onSlideStart(true, id);
@@ -382,23 +402,28 @@ var HandyCollapse = function()
 					toggleButton.parentNode.classList.remove(HANDY_COLLAPSED_CLASS);
 					toggleButton.parentNode.classList.add(HANDY_EXPAND_CLASS);
 					if (isAimation) {
-						toggleContent.style.transition = this.animatinSpeed + "ms " + this.cssEasing;
+						toggleContent.style.transition = this.animationDelay + "ms " + this.cssEasing;
 						toggleContent.style.maxHeight = (clientHeight || "1000") + "px";
 						setTimeout(function() {
-							if (isRunCallback !== false) _this3.onSlideEnd(true, id);
+							if (isRunCallback !== false) _this.onSlideEnd(true, id);
 							toggleContent.style.maxHeight = "none";
 							toggleContent.style.transition = "";
-						}, this.animatinSpeed);
+						}, this.animationDelay);
 					} else {
 						toggleContent.style.maxHeight = "none";
 					}
 					this.itemsStatus[id] = HANDY_EXPAND_CLASS;
+
+					if (clientHeight == 0) {
+						clientHeight = this.getTargetHeight(toggleContent);
+					}	
+					return clientHeight;
 				}
 			}, 
 			{
 				key: "close",
 				value: function close(id) {
-					var _this4 = this;
+					var _this = this;
 					var isRunCallback = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
 					var isAimation = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : true;
 					if (!id) return;
@@ -412,15 +437,17 @@ var HandyCollapse = function()
 						toggleContent.style.maxHeight = "0px";
 					}, 5);
 					if (isAimation) {
-						toggleContent.style.transition = this.animatinSpeed + "ms " + this.cssEasing;
+						toggleContent.style.transition = this.animationDelay + "ms " + this.cssEasing;
 						setTimeout(function() {
-							if (isRunCallback !== false) _this4.onSlideEnd(false, id);
+							if (isRunCallback !== false) _this.onSlideEnd(false, id);
 							toggleContent.style.transition = "";
-						}, this.animatinSpeed);
+						}, this.animationDelay);
 					} else {
 						this.onSlideEnd(false, id);
 					}
 					this.itemsStatus[id] = HANDY_COLLAPSED_CLASS;
+					
+					return toggleContent.clientHeight;
 				}
 			}, 
 			{

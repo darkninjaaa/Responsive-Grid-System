@@ -2,6 +2,8 @@
 	<div class="grids_col grids_16_of_24">
 		<div id="main_view_wrapper" class="main-view-wrapper clearfix">
 
+<div class="main_view_grids_col grids_col grids_24_of_24">
+
 <!-- HEADER: MENU + HEROE SECTION -->
 <header>
 
@@ -125,6 +127,8 @@
         }
     }
 </script>
+
+</div>		
 
 <!-- -->
 

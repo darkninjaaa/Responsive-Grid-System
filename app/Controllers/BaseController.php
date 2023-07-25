@@ -43,6 +43,13 @@ abstract class BaseController extends Controller
      */
     // protected $session;
 
+    protected $uri;
+    protected $TotalSegments;
+	protected $seg_controller;
+    protected $seg_func;
+    protected $seg_table;
+	protected $seg_index;
+
     /**
      * Constructor.
      */
@@ -54,5 +61,25 @@ abstract class BaseController extends Controller
         // Preload any models, libraries, etc, here.
 
         // E.g.: $this->session = \Config\Services::session();
+
+		$this->request = \Config\Services::request();
+		$this->uri = $this->request->uri;
+		$this->TotalSegments = $this->uri->getTotalSegments();
+
+		//echo $uri->getScheme();         // http
+		//echo $uri->getAuthority();      // snoopy:password@example.com:88
+		//echo $uri->getUserInfo();       // snoopy:password
+		//echo $uri->getHost();           // example.com
+		//echo $uri->getPort();           // 88
+		//echo $uri->getPath();           // /path/to/page
+		//echo $uri->getQuery();          // foo=bar&bar=baz
+		//echo $uri->getSegments();       // ['path', 'to', 'page']
+		//echo $uri->getSegment(1);       // 'path'
+		//echo $uri->getTotalSegments();  // 3
+
+		$this->seg_controller = $this->uri->getTotalSegments()>=1 ? $this->uri->getSegment(1) : '/';
+		$this->seg_func       = $this->uri->getTotalSegments()>=2 ? $this->uri->getSegment(2) : '';
+		$this->seg_table      = $this->uri->getTotalSegments()>=3 ? $this->uri->getSegment(3) : '';
+		$this->seg_index      = $this->uri->getTotalSegments()>=4 ? $this->uri->getSegment(4) : '';
     }
 }

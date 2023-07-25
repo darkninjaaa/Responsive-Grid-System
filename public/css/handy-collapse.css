@@ -9,6 +9,10 @@
 	border: 1px solid #CCC;
 	-moz-border-radius: 3px;
 	-webkit-border-radius: 3px;
+	-moz-box-sizing:border-box;
+	-webkit-box-sizing:border-box;
+	box-sizing:border-box;
+	*behavior:url(boxsizing.htc);
 }
 
 .handy-subpanel
@@ -18,6 +22,10 @@
 	border: 1px solid #CCC;
 	-moz-border-radius: 3px;
 	-webkit-border-radius: 3px;
+	-moz-box-sizing:border-box;
+	-webkit-box-sizing:border-box;
+	box-sizing:border-box;
+	*behavior:url(boxsizing.htc);
 }
 
 .handy-panel.collapsed,
@@ -26,16 +34,27 @@
 	border: 1px solid #999;
 	-moz-border-radius: 3px;
 	-webkit-border-radius: 3px;
+	-moz-box-sizing:border-box;
+	-webkit-box-sizing:border-box;
+	box-sizing:border-box;
+	*behavior:url(boxsizing.htc);
 }
 
 .handy-panel.expand,
 .handy-subpanel.expand
 {
-	border-left: 1px solid #CCC;
-	border-right: 1px solid #CCC;
-	border-bottom: 1px solid #CCC;
+	border: 1px solid #999;
 	-moz-border-radius: 3px;
 	-webkit-border-radius: 3px;
+	-moz-box-sizing:border-box;
+	-webkit-box-sizing:border-box;
+	box-sizing:border-box;
+	*behavior:url(boxsizing.htc);
+}
+
+.button.is-fullwidth{
+	display:flex;
+	width:100%
 }
 
 .handy-panel > button:first-of-type,
@@ -78,18 +97,19 @@
 
 .handy-panelcontent
 { 
-	padding: 2px 3px 2px 4px; 
-	margin: 0px 0px 0px 0px;
 	overflow: hidden;
 	list-style-type: none;
+	margin: 0px 0px 0px 0px;
+	padding: 1px 3px 1px 4px; 
 }
 
-.handy-panelcontent.is-1 { background-color:#FFFFFF; }
-.handy-panelcontent.is-2 { background-color:#F7F7F7; }
-.handy-panelcontent.is-3 { background-color:#EEEEEE; }
-.handy-panelcontent.is-4 { background-color:#E7E7E7; }
-.handy-panelcontent.is-5 { background-color:#CACACA; }
-
+/* collapsed panel content */
+.handy-panel.collapsed .handy-panelcontent { 
+	display: none; 
+}
+.handy-subpanel.collapsed .handy-panelcontent { 
+	display: none; 
+}
 
 .handy-panelcontent p
 { 
@@ -97,11 +117,8 @@
 	padding: 0px 0px 2px 0px; 
 }
 
-/* collapsed panel content */
-.handy-panel.collapsed .handy-panelcontent { display: none; }
-.handy-subpanel.collapsed .handy-panelcontent { display: none; }
-
-.button.is-fullwidth{
-	display:flex;
-	width:100%
-}
+.handy-panelcontent.is-1 { background-color:#FFFFFF; }
+.handy-panelcontent.is-2 { background-color:#F7F7F7; }
+.handy-panelcontent.is-3 { background-color:#EEEEEE; }
+.handy-panelcontent.is-4 { background-color:#E7E7E7; }
+.handy-panelcontent.is-5 { background-color:#CACACA; }

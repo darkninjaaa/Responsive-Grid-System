@@ -1,8 +1,10 @@
 
-		<div class="grids_col grids_16_of_24">
+		<div class="grids_col grids_col grids_16_of_24">
 			<div id="main_view_wrapper" class="main-view-wrapper clearfix">
 
-<?php echo form_open($grids_controller.'/reset_grid'); ?> <!--$action = site_url($action);-->
+<div id="main_view_net" class="main-view-net clearfix">
+
+				<?php echo form_open($grids_controller.'/reset_grid'); ?> <!--$action = site_url($action);-->
 
 					<p>
 						<strong><span>source : </span></strong>
@@ -73,7 +75,7 @@
 
 					<p><input type="submit" value="reset, submit" /></p>
 
-<?php echo form_close(); ?>
+				<?php echo form_close(); ?>
 
 				<script type="text/javascript">
 					function checkMaxLength(object, min=null, max=null) {
@@ -89,54 +91,13 @@
 					}
 				</script>
 
-				<div class="grids_col grids_12_of_24">
-					<div class="panel panel-danger">
-						<div class="handy-panel main collapsed">
-							<button type="button" class="button is-fullwidth" data-main-button="typ">태풍통보문</button>
-							<div class="handy-panelcontent is-1" data-main-content="typ">
-								<div class="panel panel-danger">
-									<div class="panel-heading">
-										<a target="_blank" href="https://www.weather.go.kr/w/typhoon/report.do">태풍통보문</a>
-										<button type="button" id="loadtyp" style="float:right">load typ</button>
-									</div>
-									<div id="typdiv">
-										<img id="typloadimg" style="margin:3px auto 0 auto; display:none;"></img>
-										<?php echo "get_typ()"; ?><br>
-										<?php echo "get_typ()"; ?><br>
-										<?php echo "get_typ()"; ?><br>
-										<?php echo "get_typ()"; ?><br>
-										<?php echo "get_typ()"; ?><br>
-										<?php echo "get_typ()"; ?><br>
-										<?php echo "get_typ()"; ?><br>
-										<?php echo "get_typ()"; ?><br>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
+</div><!--main-view-net-->
 
-				<div class="grids_col grids_12_of_24">
-					<div class="panel panel-danger">
-						<div class="handy-panel main collapsed">
-							<button type="button" class="button is-fullwidth" data-main-button="warning">기상특보</button>
-							<div class="handy-panelcontent is-1" data-main-content="warning">
-								<div class="panel panel-danger">
-									<div class="panel-heading">
-										<a target="_blank" href="https://www.weather.go.kr/w/weather/warning/list.do">기상특보</a>
-										<button type="button" id="loadwarning" style="float:right">load warning</button>
-									</div>
-									<div class="panel-content">
-										<img id="warningloadimg" style="margin:3px auto 0 auto; display:none;"></img>
-										<div id="warning_head"><?php echo "$warning[0]"; ?></div>
-										<div id="warning_content"><?php echo "$warning[1]"; ?></div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				
+<div class="grids_col grids_24_of_24">
+	<div id="main_view_dummy" class="main-view-dummy clearfix">
+	</div><!--main-view-dummy-->
+</div>		
+
 			</div><!--main-view-wrapper-->
 			<div class="clearfix"></div>
 		</div><!--grids_16_of_24-->
