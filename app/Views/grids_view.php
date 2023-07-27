@@ -3,7 +3,7 @@
 			<div id="main_view_wrapper" class="main-view-wrapper clearfix">
 
 <div id="main_view_net" class="main-view-net clearfix">
-<div class="grids_col grids_24_of_24">
+<div class="main_view_grids_col grids_col grids_24_of_24">
 
 				<?php echo form_open($grids_controller.'/reset_grid'); ?> <!--$action = site_url($action);-->
 

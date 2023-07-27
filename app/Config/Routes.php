@@ -45,6 +45,9 @@ $routes->get('/grids', 'Grids::index');
 $routes->get('/grids/index', 'Grids::index');
 $routes->post('/grids/reset_grid', 'Grids::reset_grid');
 
+$routes->get('/pannels', 'Pannels::index');
+$routes->get('/pannels/index', 'Pannels::index');
+
 /*
  * --------------------------------------------------------------------
  * Additional Routing

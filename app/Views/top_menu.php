@@ -9,6 +9,7 @@
 					<li><a href="<?php echo ROOT_PATH.'/'.'home'; ?>">Home</a></li>
 					<li><a href="<?php echo ROOT_PATH.'/'.'main'; ?>">Main</a></li>
 					<li><a href="<?php echo ROOT_PATH.'/'.'grids'; ?>">Grids</a></li>
+					<li><a href="<?php echo ROOT_PATH.'/'.'pannels'; ?>">Pannels</a></li>
 				</ul>
 			</li>	
 			<li><a><span class="hassubmenu">BLOG</span></a>

@@ -1,4 +1,3 @@
-
 var HANDY_PANEL            = "handy-panel";
 var HANDY_SUBPANEL         = "handy-subpanel";
 var HANDY_PANELCONTENT     = "handy-panelcontent";
@@ -109,18 +108,16 @@ var HandyCollapse = function()
             toggleHeadingAttr: HANDY_NAMESPACE_HEAD + "-" + (options.nameSpace || HANDY_NAMESPACE) + "-" + HANDY_HEADING_TAG,
             toggleContentAttr: HANDY_NAMESPACE_HEAD + "-" + (options.nameSpace || HANDY_NAMESPACE) + "-" + HANDY_CONTENT_TAG,
             isAimation: true,
-            closeOthers: true,
+	        isRunCallback: true,
+            closeOthers: false,
             animationDelay: HANDY_ANIMATION_DELAY,
 			displayDelay: HANDY_DISPLAY_DELAY,
             cssEasing: HANDY_CSS_EASING,
 			cookie_name : HANDY_COOKIE_NAME + "-" + (options.nameSpace || HANDY_NAMESPACE),
-            onToggleSlide: (options.onToggleSlide || false), 
-            onSlideStart: function onSlideStart() {
-                return false;
-            },
-            onSlideEnd: function onSlideEnd() {
-                return false;
-            }
+            onToggleStart: (options.onToggleStart || false), 
+            onToggleEnd: (options.onToggleEnd || false), 
+            onSlideStart: (options.onSlideStart || function onSlideStart() { return false; }),
+            onSlideEnd: (options.onSlideEnd || function onSlideEnd() { return false; })
         }, options);
 		
         this.toggleHeadingEls = document.querySelectorAll("[" + this.toggleHeadingAttr + "]");
@@ -196,7 +193,7 @@ var HandyCollapse = function()
 
 					var state = JSON.stringify(state_json);
 		
-					// set the cookie expiration date 1 year from now
+					// set the cookie expiration date 1 day from now
 					var today = new Date();
 					var expirationDate = new Date(today.getTime() + 1 * 1000 * 60 * 60 * 24);
 					
@@ -246,7 +243,7 @@ var HandyCollapse = function()
 						if (id) {
 							buttonEl.addEventListener("click", function(e) {
 								e.preventDefault();
-								_this.toggleSlide(id, buttonEl);
+								_this.toggleSlide(id, _this.isRunCallback, _this.isAimation);
 							}, false);
 						}
 					});
@@ -326,7 +323,7 @@ var HandyCollapse = function()
 			}, 
 			{
 				key: "toggleSlide",
-				value: function toggleSlide(id, buttonEl) {
+				value: function toggleSlide(id, isRunCallback, isAimation) {
 					var _this = this;
 					var isRunCallback = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
 					var addremove = '';
@@ -342,21 +339,21 @@ var HandyCollapse = function()
 					if (toggleButton.parentNode.classList.contains(this.nameSpaceNchild))
 						nestedparentchild = 'nestedchild';
 
-					if (this.nameSpace.indexOf(this.nameSpaceMleft) != -1) //"mainleft"
-						position = this.nameSpaceMleft;
-					else if (this.nameSpace.indexOf(this.nameSpaceMright) != -1) 
-						position = this.nameSpaceMright;
-					else if (this.nameSpace.indexOf(this.nameSpaceMnleft) != -1) //"mainleft"
-						position = this.nameSpaceMnleft;
-					else if (this.nameSpace.indexOf(this.nameSpaceMnright) != -1) 
-						position = this.nameSpaceMnright;
-					else if (this.nameSpace.indexOf(this.nameSpaceMrow) != -1) // "mainrow"
-						position = this.nameSpaceMrow;
-					else if (this.nameSpace.indexOf(this.nameSpaceLeft) != -1) //"left"
+					if (this.nameSpace == this.nameSpaceLeft) //"left"
 						position = this.nameSpaceLeft;
-					else if (this.nameSpace.indexOf(this.nameSpaceNested) != -1)
+					else if (this.nameSpace == this.nameSpaceNested) //"nested" left nested
 						position = this.nameSpaceNested;
-					else if (this.nameSpace.indexOf(this.nameSpaceRight) != -1) 
+					else if (this.nameSpace == this.nameSpaceMrow) // "mainrow" main left right same height
+						position = this.nameSpaceMrow;
+					else if (this.nameSpace == this.nameSpaceMleft) //"mainleft"
+						position = this.nameSpaceMleft;
+					else if (this.nameSpace == this.nameSpaceMright) //"mainright"
+						position = this.nameSpaceMright;
+					else if (this.nameSpace == this.nameSpaceMnleft) //"mainnleft" main nested left
+						position = this.nameSpaceMnleft;
+					else if (this.nameSpace == this.nameSpaceMnright) //"mainnright" main nested right
+						position = this.nameSpaceMnright;
+					else if (this.nameSpace == this.nameSpaceRight) //"right"
 						position = this.nameSpaceRight;
 					if (this.itemsStatus[id] == HANDY_EXPAND_CLASS) {
 						this.saveSettings(id, HANDY_COLLAPSED_CLASS);
@@ -364,7 +361,10 @@ var HandyCollapse = function()
 							position == this.nameSpaceMnleft || position == this.nameSpaceMnright)
 							addremove = 'remove';
 						ar = 'remove';
-						clientHeight = this.close(id, isRunCallback, this.isAimation);
+						if (this.onToggleStart !== false) {
+							_this.onToggleStart(addremove, position);
+						}
+						clientHeight = this.close(id, isRunCallback, isAimation);
 						if (nestedparentchild != 'nestedchild')
 							delay = this.animationDelay;
 					} else {
@@ -373,21 +373,22 @@ var HandyCollapse = function()
 							position == this.nameSpaceMnleft || position == this.nameSpaceMnright)
 							addremove = 'add';
 						ar = 'add';
-						clientHeight = this.open(id, isRunCallback, this.isAimation);
-					}
-					if (this.onToggleSlide) {
+						if (this.onToggleStart !== false) {
+							_this.onToggleStart(addremove, position);
+						}
+						clientHeight = this.open(id, isRunCallback, isAimation);
 						if (this.displayDelay != 0)
 							delay = this.displayDelay;
-						setTimeout(function() { _this.onToggleSlide(clientHeight, addremove, ar, position, nestedparentchild); }, delay);
+					}
+					if (this.onToggleEnd !== false) {
+						setTimeout(function() { _this.onToggleEnd(clientHeight, addremove, ar, position, nestedparentchild); }, delay);
 					}
 				}
 			}, 
 			{
 				key: "open",
-				value: function open(id) {
+				value: function open(id, isRunCallback, isAimation) {
 					var _this = this;
-					var isRunCallback = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
-					var isAimation = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : true;
 					if (!id) return;
 					if (this.closeOthers) {
 						Array.prototype.slice.call(this.toggleHeadingEls).forEach(function(buttonEl, index) {
@@ -422,10 +423,8 @@ var HandyCollapse = function()
 			}, 
 			{
 				key: "close",
-				value: function close(id) {
+				value: function close(id, isRunCallback, isAimation) {
 					var _this = this;
-					var isRunCallback = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
-					var isAimation = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : true;
 					if (!id) return;
 					if (isRunCallback !== false) this.onSlideStart(false, id);
 					var toggleButton = document.querySelector("[" + this.toggleHeadingAttr + "='" + id + "']");
