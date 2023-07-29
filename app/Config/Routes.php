@@ -13,7 +13,7 @@ $routes = Services::routes();
 $routes->setDefaultNamespace('App\Controllers');
 
 //$routes->setDefaultController('Home');
-$routes->setDefaultController('Main');
+$routes->setDefaultController(DEFAULT_CONTROLLER); //define in config/constants.php
 
 $routes->setDefaultMethod('index');
 $routes->setTranslateURIDashes(false);
@@ -34,12 +34,12 @@ $routes->set404Override();
 // route since we don't have to scan directories.
 
 // add
+$routes->get('/home', 'Home::index');
+$routes->get('/home/index', 'Home::index');
+
 $routes->get('/', 'Main::index');
 $routes->get('/main', 'Main::index');
 $routes->get('/main/index', 'Main::index');
-
-$routes->get('/home', 'Home::index');
-$routes->get('/home/index', 'Home::index');
 
 $routes->get('/grids', 'Grids::index');
 $routes->get('/grids/index', 'Grids::index');

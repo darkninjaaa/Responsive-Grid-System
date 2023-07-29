@@ -3,7 +3,7 @@
 	<div id="nav" class="nav clearfix">
 		<div id="nav-button" class="nav-button">nav button</div>
 		<ul id="nav-ul" class="nav-ul submenu">
-			<li><a href="<?php echo HTTP_ROOT; ?>/"  hyperlink="true" target_blank="false"><span>Home</span></a></li>
+			<li><a href="<?php echo HTTP_ROOT; ?>/"  hyperlink="true" target_blank="false"><span>Main</span></a></li>
 			<li><a><span class="hassubmenu">php</span></a>
 				<ul class="submenu">
 					<li><a href="<?php echo ROOT_PATH.'/'.'home'; ?>">Home</a></li>

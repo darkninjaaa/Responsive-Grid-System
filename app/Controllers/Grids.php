@@ -111,64 +111,60 @@ class Grids extends BaseController
 
     public function view()
     {
-		$top_data = Array(
-			'title' => "grids",
-			'grids_name' => $this->grids_name,
-			'grids_columns' => $this->grids_columns,
-			'grid_css' => $this->grid_css(),
-		);
-		$left_data = Array(
-			'TotalSegments' => $this->TotalSegments,
-			'seg_controller' => $this->seg_controller,
-			'seg_func' => $this->seg_func,
-			'seg_table' => $this->seg_table,
-			'seg_index' => $this->seg_index,
-		);
-		$main_data = Array(
-			'grids_controller' => $this->grids_controller,
-			'grids_name' => $this->grids_name,
-			'grids_columns' => $this->grids_columns,
-			'margin_top' => $this->margin_top,
-			'margin_right' => $this->margin_right,
-			'margin_bottom' => $this->margin_bottom,
-			'margin_left' => $this->margin_left,
-			'padding_top' => $this->padding_top,
-			'padding_right' => $this->padding_right,
-			'padding_bottom' => $this->padding_bottom,
-			'padding_left' => $this->padding_left,
-			'margin_innercol_top' => $this->margin_innercol_top,
-			'margin_innercol_right' => $this->margin_innercol_right,
-			'margin_innercol_bottom' => $this->margin_innercol_bottom,
-			'margin_innercol_left' => $this->margin_innercol_left,
-			'padding_innercol_top' => $this->padding_innercol_top,
-			'padding_innercol_right' => $this->padding_innercol_right,
-			'padding_innercol_bottom' => $this->padding_innercol_bottom,
-			'padding_innercol_left' => $this->padding_innercol_left,
-			'outer_color' => $this->outer_color,
-			'inner_color' => $this->inner_color,
-			'write_css' => $this->write_css,
-			'grid_css' => $this->grid_css(),
-			'grid_pre' => $this->grid_pre(),
-			'grid_html' => $this->grid_html(),
-			'grid_left' => $this->grid_html(),
-			'grid_right' => $this->grid_html(),
-			'grid_left_width' => $this->grid_left_width,
-			'grid_right_width' => $this->grid_right_width,
-		);
-		$right_data = Array(
-		);
-		$bottom_data = Array(
-			'TotalSegments' => $this->TotalSegments,
-			'seg_controller' => $this->seg_controller,
-			'seg_func' => $this->seg_func,
-			'seg_table' => $this->seg_table,
+		$data = Array(
+			'head_data' => Array(
+				'title' => "grids",
+				'grids_name' => $this->grids_name,
+				'grids_columns' => $this->grids_columns,
+				'grid_css' => $this->grid_css(),
+				'TotalSegments' => $this->TotalSegments,
+				'seg_controller' => $this->seg_controller,
+				'seg_func' => $this->seg_func,
+				'seg_table' => $this->seg_table,
+				'seg_index' => $this->seg_index,
+			),
+			'view_data' => Array(
+				'grids_controller' => $this->grids_controller,
+				'grids_name' => $this->grids_name,
+				'grids_columns' => $this->grids_columns,
+				'margin_top' => $this->margin_top,
+				'margin_right' => $this->margin_right,
+				'margin_bottom' => $this->margin_bottom,
+				'margin_left' => $this->margin_left,
+				'padding_top' => $this->padding_top,
+				'padding_right' => $this->padding_right,
+				'padding_bottom' => $this->padding_bottom,
+				'padding_left' => $this->padding_left,
+				'margin_innercol_top' => $this->margin_innercol_top,
+				'margin_innercol_right' => $this->margin_innercol_right,
+				'margin_innercol_bottom' => $this->margin_innercol_bottom,
+				'margin_innercol_left' => $this->margin_innercol_left,
+				'padding_innercol_top' => $this->padding_innercol_top,
+				'padding_innercol_right' => $this->padding_innercol_right,
+				'padding_innercol_bottom' => $this->padding_innercol_bottom,
+				'padding_innercol_left' => $this->padding_innercol_left,
+				'outer_color' => $this->outer_color,
+				'inner_color' => $this->inner_color,
+				'write_css' => $this->write_css,
+				'grid_css' => $this->grid_css(),
+				'grid_pre' => $this->grid_pre(),
+				'grid_html' => $this->grid_html(),
+				'grid_left' => $this->grid_html(),
+				'grid_right' => $this->grid_html(),
+				'grid_left_width' => $this->grid_left_width,
+				'grid_right_width' => $this->grid_right_width,
+			),
+			'tail_data' => Array(
+				'TotalSegments' => $this->TotalSegments,
+				'seg_controller' => $this->seg_controller,
+				'seg_func' => $this->seg_func,
+				'seg_table' => $this->seg_table,
+			)
 		);
 
-		echo view('top_view', $top_data);
-		echo view('left_view', $left_data);
-		echo view('grids_view', $main_data);
-		echo view('right_view', $right_data);
-		echo view('bottom_view', $bottom_data);
+		echo view('main_head', $data['head_data']);
+		echo view('grids_view', $data['view_data']);
+		echo view('main_tail', $data['tail_data']);
     }
 
 	public function grid_css($test_css = true) 

@@ -29,33 +29,29 @@ class Main extends BaseController
 	
     public function view()
     {
-		$top_data = Array(
-			'title' => "main",
-		);
-		$left_data = Array(
-			'TotalSegments' => $this->TotalSegments,
-			'seg_controller' => $this->seg_controller,
-			'seg_func' => $this->seg_func,
-			'seg_table' => $this->seg_table,
-			'seg_index' => $this->seg_index,
-		);
-		$main_data = Array(
-		);
-		$right_data = Array(
-		);
-		$bottom_data = Array(
-			'TotalSegments' => $this->TotalSegments,
-			'seg_controller' => $this->seg_controller,
-			'seg_func' => $this->seg_func,
-			'seg_table' => $this->seg_table,
-			'seg_index' => $this->seg_index,
+		$data = Array(
+			'head_data' => Array(
+				'title' => "main",
+				'TotalSegments' => $this->TotalSegments,
+				'seg_controller' => $this->seg_controller,
+				'seg_func' => $this->seg_func,
+				'seg_table' => $this->seg_table,
+				'seg_index' => $this->seg_index,
+			),
+			'view_data' => Array(
+			),
+			'tail_data' => Array(
+				'TotalSegments' => $this->TotalSegments,
+				'seg_controller' => $this->seg_controller,
+				'seg_func' => $this->seg_func,
+				'seg_table' => $this->seg_table,
+				'seg_index' => $this->seg_index,
+			)
 		);
 
-		echo view('topmain_view', $top_data);
-		echo view('left_view', $left_data);
-		echo view('main_view', $main_data);
-		echo view('right_view', $right_data);
-		echo view('bottom_view', $bottom_data);
+		echo view('main_head', $data['head_data']);
+		echo view('main_view', $data['view_data']);
+		echo view('main_tail', $data['tail_data']);
     }
 
 }
