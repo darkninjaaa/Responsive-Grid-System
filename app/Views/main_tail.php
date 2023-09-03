@@ -1,5 +1,11 @@
 
 			</div><!--main-view-wrapper-->
+
+			<div class="grids_col grids_24_of_24">
+				<div id="main_view_dummy" class="main-view-dummy clearfix">
+				</div><!--main-view-dummy-->
+			</div>		
+
 		</div><!--grids_16_of_24-->
 
 		<div class="grids_col grids_4_of_24">
@@ -109,35 +115,31 @@
 				return false;
 		}
 
-		var set_height_main_view_wrapper = true;
+		var set_height_main_view_wrapper = false;
 		var delay = 0;
 		if (set_height_main_view_wrapper) {
 			function fmvToggleStart(addremove, position) { 
 				return false;
 			}
-			function fmvToggleEnd(hpc_h, addremove, ar, position, nestedparentchild) { 
-				setheight_main_view_wrapper(hpc_h, addremove, ar, position, nestedparentchild);
+			function fmvToggleEnd(hpc_h, addremove, position, nestedparentchild) { 
+				setheight_main_view_wrapper(hpc_h, addremove, position, nestedparentchild);
 			}
 		}	
 		else {	
+			delay = 0;
 			function fmvToggleStart(addremove, position) { 
 				if (isScrollable()) {
 					var bw = document.getElementById('bottom_wrapper');
 					bw.style.opacity = "0";
 				}	
 			}
-			delay = 400;
-			function fmvToggleEnd(hpc_h, addremove, ar, position, nestedparentchild) { 
-				setheight_main_view_dummy(hpc_h, addremove, ar, position, nestedparentchild);
-
-				//setTimeout(function() { 
+			function fmvToggleEnd(hpc_h, addremove, position, nestedparentchild) { 
+				setTimeout(function() { 
+					setheight_main_view_dummy(hpc_h, addremove, position, nestedparentchild);
 					var bw = document.getElementById('bottom_wrapper');
 					bw.style.opacity = "1";
-				//}, 0);
+				}, 400);
 			}
-			//function fmvToggleEnd(hpc_h, addremove, ar, position, nestedparentchild) { 
-			//	setTimeout(function() { setheight_main_view_dummy(hpc_h, addremove, ar, position, nestedparentchild); }, 100);
-			//}
 		}	
         let handy_left = new HandyCollapse({ nameSpace: "left",	onToggleStart: fmvToggleStart, onToggleEnd: fmvToggleEnd, displayDelay: delay });
         let handy_right = new HandyCollapse({ nameSpace: "right", onToggleStart: fmvToggleStart, onToggleEnd: fmvToggleEnd, displayDelay: delay });
@@ -165,7 +167,7 @@
 	</script>
 
 	<script type="text/javascript">
-		function setheight_main_view_wrapper(hpc_h=0, addremove='', ar='', position='', nestedparentchild='') {
+		function setheight_main_view_wrapper(hpc_h=0, addremove='', position='', nestedparentchild='') {
 			var px2num = function (val) {
 				val = +Number(val.replace('px', '')) || 0
 				return val;
@@ -195,6 +197,7 @@
 			var mvnright_h = 0;
 			var mvrow_h = 0;
 			var mvg_h = 0;
+
 			for (var i=0; i<panelsList.length; i++)
 			{
 				panel = panelsList[i];
@@ -221,13 +224,14 @@
 						mvnright_h += panel.offsetHeight;
 				}	
 			}
-			if (addremove=='')
-				mvrow_h -= 4;
-			else
-				mvrow_h += 1;
-			
-			if (nestedparentchild == 'nestedchild' && addremove == 'remove')
-				mvrow_h += 5;
+			if (mvrow_h > 0) {
+				if (addremove=='')
+					mvrow_h -= 4;
+				else
+					mvrow_h += 1;
+				if (nestedparentchild == 'nestedchild' && addremove == 'remove')
+					mvrow_h += 5;
+			}	
 
 			var lsw = document.getElementById('left_sidebar_wrapper');
 			var rsw = document.getElementById('right_sidebar_wrapper');
@@ -254,9 +258,6 @@
 			var tw_h = px2num(window.getComputedStyle(tw,null).getPropertyValue('height'));
 
 			var mv = document.getElementById('main_view_wrapper');
-			var mypdf_div = document.getElementById('mypdf_div');
-			if (mypdf_div) 
-				mv = mypdf_div;
 			var mv_h = px2num(window.getComputedStyle(mv,null).getPropertyValue('height'));
 
 			var bw = document.getElementById('bottom_wrapper');
@@ -343,7 +344,7 @@
 			else {
 				mvnleftright_h = (mvnleft_h > mvnright_h) ? mvnleft_h : mvnright_h;;
 			}	
-
+			
 			var mvheight_h = mvg_h + mvrow_h + mvleftright_h + mvnleftright_h;
 
 			var mvnew_h = 0;
@@ -359,13 +360,13 @@
 
 			var mvr_h = wih - tw_h - bw_h - 10;
 
-			var wrapper_h = (mvr_h > mvnew_h) ? mvr_h : mvnew_h; //main-view handy-pannel count * 4 = 8;
-			wrapper_h = (wrapper_h > lswrsw_h) ? wrapper_h : lswrsw_h;
+			var mainview_h = (mvr_h > mvnew_h) ? mvr_h : mvnew_h; //main-view handy-pannel count * 4 = 8;
+			mainview_h = (mainview_h > lswrsw_h) ? mainview_h : lswrsw_h;
 
-			var twrb_h = tw_h + wrapper_h + bw_h;
-			var twr_h = tw_h + wrapper_h;
-			var wrb_h = wrapper_h + bw_h;
-			twr_h = (twr_h > wrb_h) ? twr_h : wrb_h;
+			var tmvb_h = tw_h + mainview_h + bw_h;
+			var tmv_h = tw_h + mainview_h;
+			var mvb_h = mainview_h + bw_h;
+			tmv_h = (tmv_h > mvb_h) ? tmv_h : mvb_h;
 
 			var isScrollable = function () {
 				var h = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight; 
@@ -398,17 +399,17 @@
 			text += addremove + " " + position + "&#13;&#10;";
 			text += "&#13;&#10;";
 
-			text += wrapper_h + " wrapper_h " + "&#13;&#10;";
-			text += twrb_h + " twrb_h " + "&#13;&#10;";
-			text += twr_h + " twr_h " + "&#13;&#10;";
-			text += wrb_h + " wrb_h " + "&#13;&#10;";
+			text += mainview_h + " mainview_h " + "&#13;&#10;";
+			text += tmvb_h + " tmvb_h " + "&#13;&#10;";
+			text += tmv_h + " tmv_h " + "&#13;&#10;";
+			text += mvb_h + " mvb_h " + "&#13;&#10;";
 			text += "&#13;&#10;";
 
-			if (wih >= twrb_h) { 
+			if (wih >= tmvb_h) { 
 				if (isScrollable()) {
-					if (wrapper_h > lswrsw_h) {
-						mv.style.height = wrapper_h + 'px';
-						text += wrapper_h + " 111 ";
+					if (mainview_h > lswrsw_h) {
+						mv.style.height = mainview_h + 'px';
+						text += mainview_h + " 111 ";
 					}
 					else {
 						mv.style.height = lswrsw_h + 'px';
@@ -416,16 +417,16 @@
 					}		
 				}
 				else {
-					mv.style.height = wrapper_h + 'px';
-					text += wrapper_h + " 12 ";
+					mv.style.height = mainview_h + 'px';
+					text += mainview_h + " 12 ";
 				}	
 			}	
 			else {	
-				if (wih >= twr_h) { 
+				if (wih >= tmv_h) { 
 					if (isScrollable()) {
-						if (wrapper_h > lswrsw_h) {
-							mv.style.height = wrapper_h + 'px';
-							text += wrapper_h + " 211 ";
+						if (mainview_h > lswrsw_h) {
+							mv.style.height = mainview_h + 'px';
+							text += mainview_h + " 211 ";
 						}	
 						else {
 							mv.style.height = lswrsw_h + 'px';
@@ -433,15 +434,15 @@
 						}	
 					}
 					else {
-						mv.style.height = twr_h + 'px';
-						text += twr_h + " 221 ";
+						mv.style.height = tmv_h + 'px';
+						text += tmv_h + " 221 ";
 					}	
 				}	
 				else {
 					if (isScrollable()) {
-						if (wrapper_h > lswrsw_h) {
-							mv.style.height = wrapper_h + 'px';
-							text += wrapper_h + " 231 ";
+						if (mainview_h > lswrsw_h) {
+							mv.style.height = mainview_h + 'px';
+							text += mainview_h + " 231 ";
 						}	
 						else {
 							mv.style.height = lswrsw_h + 'px';
@@ -460,7 +461,7 @@
 	</script>
 
 	<script type="text/javascript">
-		function setheight_main_view_dummy(hpc_h=0, addremove='', ar='', position='', nestedparentchild='') {
+		function setheight_main_view_dummy(hpc_h=0, addremove='', position='', nestedparentchild='') {
 			var px2num = function (val) {
 				val = +Number(val.replace('px', '')) || 0
 				return val;
@@ -481,8 +482,6 @@
 			var rsw_h = px2num(window.getComputedStyle(rsw,null).getPropertyValue('height'));
 			var mv = document.getElementById('main_view_wrapper');
 			var mv_h = px2num(window.getComputedStyle(mv,null).getPropertyValue('height'));
-			var mvnet = document.getElementById('main_view_net');
-			var mvnet_h = px2num(window.getComputedStyle(mvnet,null).getPropertyValue('height'));
 			var mvdummy = document.getElementById('main_view_dummy');
 			var mvdummy_h = 0;
 			var bw = document.getElementById('bottom_wrapper');
@@ -490,19 +489,20 @@
 			var lswrsw_h = (lsw_h>rsw_h) ? lsw_h : rsw_h;
 			var mvr_h = wih - tw_h - bw_h - 10;
 
-			if (ar == '')
-				mvr_h = wih - tw_h - bw_h - 4;
+			//if (seg_controller == '/') {
+			//	mvr_h = wih - tw_h - bw_h - 10;
+			//}	
 
 			if (mvr_h > lswrsw_h) {
-				if (mvr_h > mvnet_h) {
-					mvdummy_h = mvr_h - mvnet_h;
+				if (mvr_h > mv_h) {
+					mvdummy_h = mvr_h - mv_h;
 				}
 			}				
-			else if (mvr_h > mvnet_h) {
-				mvdummy_h = mvr_h - mvnet_h;
+			else if (mvr_h > mv_h) {
+				mvdummy_h = mvr_h - mv_h;
 			}	
 
-			var mvnew_h = mvnet_h + mvdummy_h;
+			var mvnew_h = mv_h + mvdummy_h;
 			
 			mvdummy.style.height = mvdummy_h + 'px';
 
@@ -516,13 +516,11 @@
 
 			text += tw_h + " tw_h " + "&#13;&#10;";
 			text += mv_h + " mv_h " + "&#13;&#10;";
-			text += mvnet_h + " mvnet_h " + "&#13;&#10;";
 			text += mvdummy_h + " mvdummy_h " + "&#13;&#10;";
 			text += mvnew_h + " mvnew_h " + "&#13;&#10;";
 			text += mvr_h + " mvr_h " + "&#13;&#10;";
 			text += lsw_h + " " + rsw_h + " lsw_h rsw_h " + "&#13;&#10;";
 			text += bw_h + " bw_h " + "&#13;&#10;";
-			text += ar + " " + position + "&#13;&#10;";
 			text += "&#13;&#10;";
 
 			disp_height(text);
@@ -543,8 +541,9 @@
 			footer_end.classList.remove('footer-bottom');
 			footer_end.classList.add('footer-end');
 		}
-		
-		//document.addEventListener("DOMContentLoaded", function() {
+
+		function set_height_mv() {
+			//document.addEventListener("DOMContentLoaded", function() {
 			// Handler when the DOM is fully loaded
 			if ((seg_controller == 'board' && seg_func == 'view') || (seg_controller == 'board' && seg_func == 'edit_comment')) 
 				footer_end();
@@ -554,7 +553,10 @@
 				else	
 					setheight_main_view_dummy();
 			}	
-		//} );		
+			//} );		
+		}
+		
+		set_height_mv();
 	</script>
 
 </div><!--body-wrapper--> 

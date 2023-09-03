@@ -98,5 +98,5 @@
 			</div>
 		</div>
 
-		<div class="grids_col grids_col grids_16_of_24">
+		<div class="grids_col grids_16_of_24">
 			<div id="main_view_wrapper" class="main-view-wrapper clearfix">

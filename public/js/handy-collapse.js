@@ -381,7 +381,7 @@ var HandyCollapse = function()
 							delay = this.displayDelay;
 					}
 					if (this.onToggleEnd !== false) {
-						setTimeout(function() { _this.onToggleEnd(clientHeight, addremove, ar, position, nestedparentchild); }, delay);
+						setTimeout(function() { _this.onToggleEnd(clientHeight, addremove, position, nestedparentchild); }, delay);
 					}
 				}
 			}, 

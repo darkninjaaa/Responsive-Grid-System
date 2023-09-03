@@ -1,6 +1,4 @@
 
-		<div id="main_view_net" class="main-view-net clearfix">
-
 			<div class="grids_col grids_24_of_24">
 				<div class="grids_col grids_12_of_24">
 					<div class="handy-panel mainleft collapsed">
@@ -196,10 +194,3 @@
 					</div>
 				</div>
 			</div>		
-
-		</div><!--main-view-net-->
-
-		<div class="grids_col grids_24_of_24">
-			<div id="main_view_dummy" class="main-view-dummy clearfix">
-			</div><!--main-view-dummy-->
-		</div>		

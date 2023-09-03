@@ -1,6 +1,5 @@
 
-<div id="main_view_net" class="main-view-net clearfix">
-	<div class="grids_col grids_24_of_24">
+<div class="main_view_grids_col grids_col grids_24_of_24">
 
     <!-- STYLES -->
 
@@ -312,10 +311,4 @@
     }
 </script>
 
-			</div><!--grids_24_of_24-->
-		</div><!--main-view-net-->
-
-		<div class="grids_col grids_24_of_24">
-			<div id="main_view_dummy" class="main-view-dummy clearfix">
-			</div><!--main-view-dummy-->
-		</div>		
+</div>		

@@ -1,5 +1,4 @@
 
-		<div id="main_view_net" class="main-view-net clearfix">
 			<div class="main_view_grids_col grids_col grids_24_of_24">
 
 				<?php echo form_open($grids_controller.'/reset_grid'); ?> <!--$action = site_url($action);-->
@@ -75,24 +74,18 @@
 
 				<?php echo form_close(); ?>
 
-				<script type="text/javascript">
-					function checkMaxLength(object, min=null, max=null) {
-						if (min != null && object.value < min) {
-							object.value = min;
-						}
-						if (max != null && object.value > max) {
-							object.value = max;
-						}
-						if (object.value.length > object.maxLength){
-							object.value = object.value.slice(0, object.maxLength);
-						}
+			</div>		
+			
+			<script type="text/javascript">
+				function checkMaxLength(object, min=null, max=null) {
+					if (min != null && object.value < min) {
+						object.value = min;
 					}
-				</script>
-
-			</div><!--grids_24_of_24-->
-		</div><!--main-view-net-->
-
-		<div class="grids_col grids_24_of_24">
-			<div id="main_view_dummy" class="main-view-dummy clearfix">
-			</div><!--main-view-dummy-->
-		</div>		
+					if (max != null && object.value > max) {
+						object.value = max;
+					}
+					if (object.value.length > object.maxLength){
+						object.value = object.value.slice(0, object.maxLength);
+					}
+				}
+			</script>
